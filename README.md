@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Physarum — website
 
-## Getting Started
-
-First, run the development server:
+Next.js (App Router) + TypeScript + Tailwind v4. Dark/light via `next-themes`. Case studies in MDX.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy `.env.example` to `.env.local` (and set the same vars in Vercel):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Canonical domain, e.g. `https://yourdomain.com` (sitemap, OG, canonical URLs) |
+| `HUBSPOT_PORTAL_ID`, `HUBSPOT_FORM_ID` | Contact form → HubSpot. In production the form refuses to submit if these are missing; in dev it logs the submission. |
+| `NEXT_PUBLIC_CAL_LINK` | Cal.com link (e.g. `physarum/intro`) embedded on `/contact/thanks` |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional email shown on the contact page |
 
-## Learn More
+## Where things live
 
-To learn more about Next.js, take a look at the following resources:
+- **Services, families, headline words, budgets:** `lib/services.ts` (nav, footer, hero carousel and service pages all read from it)
+- **Case studies:** metadata in `lib/work.ts`, body in `content/work/<slug>.mdx`
+- **Logo:** `components/brand/logo-paths.ts` (traced from `brand/source/physarum-1.jpeg`), SVG files in `public/brand/`
+- **Hero:** `components/hero/MazeMold.tsx` (mold solving a faded maze, looping), `ServiceHero.tsx` (headline + revolving carousel + tendril), `components/brand/GrowingMark.tsx`
+- **Scroll trail:** `components/trail/MoldTrail.tsx` — any page with a `[data-trail-start]` element and `<Section>`s gets the trail; sections fade in when it reaches their node
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Before launch
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Replace the 6 **draft** case studies (`draft: true` in `lib/work.ts`) with real ones. Drafts show a "Draft" badge, are `noindex`, and are left out of the sitemap.
+- [ ] Register the legal entity, then finish `/privacy` and `/terms` (currently marked Draft).
+- [ ] Set the env vars above and send a test brief through HubSpot.
+- [ ] If the designer has the original logo vector or wordmark font, swap it into `logo-paths.ts`.

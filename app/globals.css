@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Monochrome UI. The only colour on the site is the living mold (--mold). */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #5c5c5c;
+  --line: #e6e6e6;
+  --card: #f6f6f6;
+  --card-hover: #efefef;
+  --mold: #d9a400;
+  --mold-soft: rgba(217, 164, 0, 0.16);
+}
+
+.dark {
+  --bg: #000000;
+  --fg: #f5f5f5;
+  --muted: #9a9a9a;
+  --line: #1f1f1f;
+  --card: #0d0d0d;
+  --card-hover: #151515;
+  --mold: #f5c518;
+  --mold-soft: rgba(245, 197, 24, 0.14);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-mold: var(--mold);
+  --color-mold-soft: var(--mold-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--mold);
+  color: #000;
+}
+
+:focus-visible {
+  outline: 2px solid var(--mold);
+  outline-offset: 3px;
+}
+
+/* Sections fade in when the mold trail reaches their node. */
+[data-trail-section] {
+  opacity: 0.2;
+  transition: opacity 0.8s ease;
+}
+[data-trail-section][data-reached="true"],
+.no-trail [data-trail-section] {
+  opacity: 1;
+}
+
+/* Headline word swap */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+.word-in {
+  animation: word-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Logo mark growing node by node */
+@keyframes node-grow {
+  from {
+    r: 0;
+  }
+}
+.node-grow {
+  animation: node-grow 0.9s cubic-bezier(0.3, 0.8, 0.3, 1) both;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--len);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-trail-section] {
+    opacity: 1;
+    transition: none;
+  }
+  .word-in,
+  .node-grow {
+    animation: none;
+  }
 }

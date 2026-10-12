@@ -1,103 +1,104 @@
-import Image from "next/image";
+import Link from "next/link";
+import { GrowingMark } from "@/components/brand/GrowingMark";
+import { HowWeWork } from "@/components/home/HowWeWork";
+import { MazeMold } from "@/components/hero/MazeMold";
+import { ServiceHero } from "@/components/hero/ServiceHero";
+import { CtaBand } from "@/components/ui/CtaBand";
+import { Section } from "@/components/ui/Section";
+import { CaseCard } from "@/components/work/CaseCard";
+import { families, servicesByFamily } from "@/lib/services";
+import { caseStudies } from "@/lib/work";
+
+const principles = [
+  {
+    title: "One team, end to end",
+    body: "Data, models, product and growth under one roof — so nothing gets lost between vendors.",
+  },
+  {
+    title: "Measured, not assumed",
+    body: "Every engagement ships with the evals, analytics or QA reports that show it worked.",
+  },
+  {
+    title: "Confidential by default",
+    body: "NDAs as standard, least-privilege access to your data, and work we never reuse without permission.",
+  },
+  {
+    title: "Distributed across time zones",
+    body: "A team that has delivered for clients worldwide, so work keeps moving while you sleep.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <section className="relative overflow-hidden pt-14 pb-16 md:pt-20 md:pb-24">
+        <MazeMold className="absolute inset-0 h-full w-full [mask-image:radial-gradient(ellipse_at_50%_45%,#000_45%,transparent_92%)]" />
+        <div className="relative">
+          <GrowingMark data-maze-start className="mx-auto mb-10 h-16 w-auto text-fg md:h-20" />
+          <ServiceHero />
+          <div className="mt-10 flex flex-wrap justify-center gap-3 px-4">
+            <Link href="/contact" className="rounded-full bg-fg px-6 py-3 font-medium text-bg transition hover:opacity-85">
+              Start a project
+            </Link>
+            <Link href="/work" className="rounded-full border border-line px-6 py-3 font-medium transition hover:border-fg">
+              See our work
+            </Link>
+          </div>
+          <span data-trail-start className="mx-auto mt-14 block size-1" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <Section
+        eyebrow="Proven paths"
+        title="Work across data, product and growth."
+        intro="Much of our AI work is under NDA, so some clients appear by description rather than name."
+      >
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {caseStudies.map((c) => (
+            <CaseCard key={c.slug} c={c} />
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="How we work"
+        title="Explore every route. Keep the one that works."
+        intro="Physarum polycephalum finds the shortest path through a maze with no map: it spreads, abandons dead ends and reinforces the best route. That’s our process too."
+      >
+        <HowWeWork />
+      </Section>
+
+      <Section eyebrow="Capabilities" title="Nine services, three ways in.">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+          {families.map((f) => (
+            <Link key={f.slug} href={`/services/${f.slug}`} className="group bg-bg p-6 transition hover:bg-card md:p-8">
+              <h3 className="text-2xl font-semibold tracking-tight">{f.name}</h3>
+              <p className="mt-2 text-sm text-muted">{f.tagline}</p>
+              <ul className="mt-6 space-y-2">
+                {servicesByFamily(f.slug).map((s) => (
+                  <li key={s.slug} className="border-t border-line pt-2">
+                    {s.name}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm text-muted group-hover:text-fg">Explore {f.name} →</p>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
+      <Section eyebrow="Why Physarum" title="Built like the organism: decentralised, adaptive, efficient.">
+        <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+          {principles.map((p) => (
+            <div key={p.title} className="border-t border-line pt-5">
+              <h3 className="text-lg font-semibold">{p.title}</h3>
+              <p className="mt-2 text-muted">{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <CtaBand />
+    </>
   );
 }

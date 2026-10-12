@@ -1,0 +1,13 @@
+## The problem
+
+Public coding benchmarks leak into training data. The client needed tasks no model had seen, graded the same way every time.
+
+## The path
+
+- Designed realistic, multi-file tasks inside containers, each with a hidden test suite.
+- Wrote deterministic graders and checked each task's reference solution scores full marks.
+- Ran frontier models against the set to calibrate difficulty, then removed tasks that were broken rather than hard.
+
+## The result
+
+**A private, reproducible benchmark the client runs on every model release.** Replace this draft with task counts and pass rates.
