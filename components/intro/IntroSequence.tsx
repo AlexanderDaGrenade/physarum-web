@@ -26,17 +26,18 @@ import { services } from "@/lib/services";
  */
 
 const LINE_START = 1.0; // s, after the mark has started growing
-const TRAVEL = 5.4; // s spent moving
 const WRITE = 0.6;
 const HOLD = 0.35;
 const ZOOM = 0.9;
+// travel = s spent moving; dwell = s paused at each service; label = label size multiplier
+// [desktop, mobile]; ease = slow into and out of each stop instead of constant speed.
 const VARIANT = {
-  classic: { dwell: 0.15, line: [3, 5], camera: false },
-  follow: { dwell: 0.28, line: [6, 10], camera: true },
+  classic: { travel: 5.4, dwell: 0.15, line: [3, 5], label: [1, 1], camera: false, ease: false },
+  follow: { travel: 6.5, dwell: 0.7, line: [6, 10], label: [1.5, 1.3], camera: true, ease: true },
 } as const;
 // Follow camera
-const CAM_ZOOM = { desktop: 2, mobile: 1.8 };
-const CAM_EASE = 4.5; // higher = tighter tracking
+const CAM_ZOOM = { desktop: 1.7, mobile: 1.6 };
+const CAM_EASE = 3.5; // higher = tighter tracking
 const PULLBACK = 1.3; // s to pull back to the whole path
 const HOLD_FULL = 0.7; // s showing the whole path
 const WORD_BOX = { x: 395.8, y: 578.1, w: 804, h: 74.8 };
@@ -210,11 +211,17 @@ export function IntroSequence() {
     const { pts, cum, total, stops } = geo;
     const V = VARIANT[variant];
     const DWELL = V.dwell;
+    const TRAVEL = V.travel;
 
-    // Time → distance along the route, pausing briefly at each service.
+    // Time → distance along the route: legs between stops, with a pause at each stop.
     const speed = total / TRAVEL;
-    const marks = stops.map((s, i) => ({ at: s.at, t: LINE_START + s.at / speed + i * DWELL }));
+    const ends = [...stops.map((s) => s.at), total];
+    const legs = ends.map((end, i) => {
+      const from = i ? ends[i - 1] : 0;
+      return { from, to: end, dur: (end - from) / speed };
+    });
     const travelEnd = LINE_START + TRAVEL + stops.length * DWELL;
+    const easeLeg = (k: number) => (V.ease ? 0.5 - Math.cos(Math.PI * k) / 2 : k);
 
     // Camera (follow variant): a viewBox that tracks the head, then pulls back.
     const fullView = () => {
@@ -240,16 +247,18 @@ export function IntroSequence() {
       svg.setAttribute("viewBox", `${v.x} ${v.y} ${v.w} ${v.h}`);
     if (V.camera) setView(followView(cam));
     const distAt = (t: number) => {
-      if (t <= LINE_START) return 0;
-      let base = LINE_START;
-      let from = 0;
-      for (const m of marks) {
-        if (t < m.t) return Math.min(total, from + (t - base) * speed);
-        if (t < m.t + DWELL) return m.at;
-        base = m.t + DWELL;
-        from = m.at;
+      let at = t - LINE_START;
+      if (at <= 0) return 0;
+      for (let i = 0; i < legs.length; i++) {
+        const leg = legs[i];
+        if (at < leg.dur) return leg.from + (leg.to - leg.from) * easeLeg(at / leg.dur);
+        at -= leg.dur;
+        if (i < stops.length) {
+          if (at < DWELL) return leg.to;
+          at -= DWELL;
+        }
       }
-      return Math.min(total, from + (t - base) * speed);
+      return total;
     };
     const pointAt = (dist: number) => {
       let i = 1;
@@ -348,6 +357,7 @@ export function IntroSequence() {
   if (gone) return null;
 
   const fs = layout?.fontSize ?? 18;
+  const labelFs = fs * VARIANT[variant].label[layout?.short ? 1 : 0];
   return (
     <div
       id="intro"
@@ -414,12 +424,12 @@ export function IntroSequence() {
                 ref={(el) => {
                   labelRefs.current[i] = el;
                 }}
-                {...labelProps(s, fs)}
-                fontSize={fs}
+                {...labelProps(s, labelFs)}
+                fontSize={labelFs}
                 fontWeight={500}
                 fill="var(--fg)"
                 stroke="var(--bg)"
-                strokeWidth={fs * 0.35}
+                strokeWidth={labelFs * 0.35}
                 paintOrder="stroke"
                 style={{ opacity: 0, transition: "opacity 0.35s ease", fontFamily: "var(--font-geist-sans)" }}
               >
