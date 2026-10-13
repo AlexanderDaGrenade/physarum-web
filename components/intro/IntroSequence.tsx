@@ -76,6 +76,11 @@ function buildGeometry(L: IntroLayout) {
       stops.push({ x: px(c), y: px(r), label: L.short ? f.shortName : f.name, pos: step.label });
     }
   }
+  // Finish with a horizontal run from the left so the head touches the wordmark's "P".
+  const last = pts[pts.length - 1];
+  if (last.y !== L.word.cy) pts.push({ x: last.x, y: L.word.cy });
+  pts.push({ x: L.word.x - L.fontSize * 0.35, y: L.word.cy });
+
   const cum = [0];
   for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y));
   const total = cum[cum.length - 1];
@@ -139,8 +144,10 @@ function buildGeometry(L: IntroLayout) {
 
   // Walls, leaving clear space around the mark and the wordmark.
   const wordW = (L.word.h / WORD_BOX.h) * WORD_BOX.w;
+  const approachX = Math.min(...pts.slice(-3).map((p) => p.x));
   const clear = (x: number, y: number) =>
     Math.hypot(x - L.mark.cx, y - L.mark.cy) < L.mark.size * 0.62 ||
+    (x >= approachX && x <= L.word.x && Math.abs(y - L.word.cy) < CELL * 0.6) ||
     (x > L.word.x - 20 && x < L.word.x + wordW + 20 && Math.abs(y - L.word.cy) < L.word.h);
   let walls = "";
   for (let r = -X; r < L.rows + X; r++)
@@ -235,9 +242,40 @@ export function IntroSequence() {
       const f = fullView();
       const w = f.w / zoom;
       const h = f.h / zoom;
-      return { x: c.x - w / 2, y: c.y - h / 2, w, h };
+      const k = clampCam(c, w, h);
+      return { x: k.x - w / 2, y: k.y - h / 2, w, h };
     };
     const wordCenter = { x: layout.word.x + geo.wordW / 2, y: layout.word.cy };
+    // Near a stop, aim between the dot and its label so the whole label is in frame.
+    const frames = stops.map((s, i) => {
+      const el = labelRefs.current[i];
+      if (!el) return { x: s.x, y: s.y };
+      const b = el.getBBox();
+      const x0 = Math.min(s.x, b.x);
+      const x1 = Math.max(s.x, b.x + b.width);
+      const y0 = Math.min(s.y, b.y);
+      const y1 = Math.max(s.y, b.y + b.height);
+      return { x: (x0 + x1) / 2, y: (y0 + y1) / 2 };
+    });
+    const FRAME_RANGE = CELL * 3; // distance along the route over which the camera eases onto a stop
+    const smooth = (k: number) => k * k * (3 - 2 * k);
+    const aimAt = (dist: number, p: { x: number; y: number }) => {
+      let best = 0;
+      let frame = p;
+      stops.forEach((s, i) => {
+        const w = smooth(clamp(1 - Math.abs(dist - s.at) / FRAME_RANGE));
+        if (w > best) {
+          best = w;
+          frame = frames[i];
+        }
+      });
+      return { x: p.x + (frame.x - p.x) * best, y: p.y + (frame.y - p.y) * best };
+    };
+    // Keep the zoomed view inside the layout so labels near the edges stay visible.
+    const clampCam = (c: { x: number; y: number }, w: number, h: number) => ({
+      x: w >= layout.width ? layout.width / 2 : Math.min(layout.width - w / 2, Math.max(w / 2, c.x)),
+      y: h >= layout.height ? layout.height / 2 : Math.min(layout.height - h / 2, Math.max(h / 2, c.y)),
+    });
     const cam = { x: layout.mark.cx, y: layout.mark.cy };
     const pullStart = travelEnd + WRITE + 0.15;
     const zoomStart = V.camera ? pullStart + PULLBACK + HOLD_FULL : travelEnd + WRITE + HOLD;
@@ -298,7 +336,7 @@ export function IntroSequence() {
       const p = pointAt(dist);
 
       if (V.camera) {
-        const target = t < LINE_START ? cam : t >= travelEnd - 0.4 ? wordCenter : p;
+        const target = t < LINE_START ? cam : t >= travelEnd - 0.4 ? wordCenter : aimAt(dist, p);
         const k = 1 - Math.exp(-dt * CAM_EASE);
         cam.x += (target.x - cam.x) * k;
         cam.y += (target.y - cam.y) * k;

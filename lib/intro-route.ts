@@ -3,7 +3,8 @@ import type { FamilySlug } from "./services";
 /**
  * Hand-placed routes for the opening animation. Coordinates are maze grid cells
  * (cell = 50 units; centre of cell c is c * 50 + 25). The line starts inside the
- * logo mark, visits every service category, and ends at the maze exit beside the wordmark.
+ * logo mark, visits every service category, and ends at the maze exit. The final
+ * horizontal run into the wordmark is added automatically so the head touches the "P".
  */
 
 export type LabelPos = "above" | "below" | "left" | "right" | "above-left";
@@ -72,7 +73,7 @@ export const desktopLayout: IntroLayout = {
     [20, 12],
     [20, 13],
     [20, 16],
-    [23, 16],
+    [22, 16],
   ],
 };
 
@@ -84,7 +85,7 @@ export const mobileLayout: IntroLayout = {
   fontSize: 34,
   short: true,
   mark: { cx: 450, cy: 800, size: 220 },
-  word: { x: 150, cy: 1525, h: 50 },
+  word: { x: 230, cy: 1525, h: 50 },
   route: [
     [8.5, 15],
     [11, 15],
