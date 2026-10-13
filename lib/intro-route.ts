@@ -3,8 +3,8 @@ import type { FamilySlug } from "./services";
 /**
  * Hand-placed routes for the opening animation. Coordinates are maze grid cells
  * (cell = 50 units; centre of cell c is c * 50 + 25). The line starts inside the
- * logo mark, visits every service category, and ends at the maze exit. The final
- * horizontal run into the wordmark is added automatically so the head touches the "P".
+ * logo mark, visits every service category, and ends at the maze exit. With
+ * `touchWord`, a final horizontal run into the wordmark is added so the head touches the "P".
  */
 
 export type LabelPos = "above" | "below" | "left" | "right" | "above-left";
@@ -21,6 +21,10 @@ export type IntroLayout = {
   mark: { cx: number; cy: number; size: number };
   /** Wordmark box: left edge, vertical centre, height. */
   word: { x: number; cy: number; h: number };
+  /** Follow camera eases onto each dot + label and stays inside the maze bounds. */
+  frameLabels: boolean;
+  /** Finish with a horizontal run so the head touches the wordmark's "P". */
+  touchWord: boolean;
   route: RouteStep[];
 };
 
@@ -43,6 +47,8 @@ export const desktopLayout: IntroLayout = {
   short: false,
   mark: { cx: 800, cy: 450, size: 150 },
   word: { x: 1195, cy: 825, h: 34 },
+  frameLabels: false,
+  touchWord: false,
   route: [
     [15.5, 8],
     [17, 8],
@@ -73,7 +79,7 @@ export const desktopLayout: IntroLayout = {
     [20, 12],
     [20, 13],
     [20, 16],
-    [22, 16],
+    [23, 16],
   ],
 };
 
@@ -86,6 +92,8 @@ export const mobileLayout: IntroLayout = {
   short: true,
   mark: { cx: 450, cy: 800, size: 220 },
   word: { x: 230, cy: 1525, h: 50 },
+  frameLabels: true,
+  touchWord: true,
   route: [
     [8.5, 15],
     [11, 15],
