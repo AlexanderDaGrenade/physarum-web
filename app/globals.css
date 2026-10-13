@@ -70,6 +70,17 @@ body {
   opacity: 1;
 }
 
+/* Opening sequence: hidden once played this session or with reduced motion
+   (class set before first paint by the inline script in app/layout.tsx). */
+.intro-done #intro {
+  display: none;
+}
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
 /* Headline word swap */
 @keyframes word-in {
   from {

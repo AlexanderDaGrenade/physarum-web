@@ -3,6 +3,8 @@ export type FamilySlug = "ai-data" | "build" | "grow";
 export type Service = {
   slug: string;
   name: string;
+  /** Compact label for tight spaces (intro animation on phones). */
+  shortName: string;
   family: FamilySlug;
   /** Last word of the hero line "Intelligence that navigates ___". */
   headlineWord: string;
@@ -45,6 +47,7 @@ export const services: Service[] = [
   {
     slug: "llm-training-data",
     name: "LLM Training Data",
+    shortName: "Training Data",
     family: "ai-data",
     headlineWord: "Training Data",
     summary:
@@ -60,6 +63,7 @@ export const services: Service[] = [
   {
     slug: "llm-benchmarking",
     name: "LLM Benchmarking",
+    shortName: "Benchmarking",
     family: "ai-data",
     headlineWord: "Benchmarks",
     summary:
@@ -74,6 +78,7 @@ export const services: Service[] = [
   {
     slug: "evals",
     name: "Evals",
+    shortName: "Evals",
     family: "ai-data",
     headlineWord: "Evaluation",
     summary:
@@ -88,6 +93,7 @@ export const services: Service[] = [
   {
     slug: "ai-automation",
     name: "AI Automation",
+    shortName: "Automation",
     family: "ai-data",
     headlineWord: "Automation",
     summary:
@@ -102,6 +108,7 @@ export const services: Service[] = [
   {
     slug: "web-apps",
     name: "Web Apps",
+    shortName: "Web Apps",
     family: "build",
     headlineWord: "the Web",
     summary: "Fast, accessible, maintainable web applications — from SaaS dashboards to marketplaces.",
@@ -115,6 +122,7 @@ export const services: Service[] = [
   {
     slug: "ai-web-apps",
     name: "AI Web Apps",
+    shortName: "AI Web Apps",
     family: "build",
     headlineWord: "AI Products",
     summary:
@@ -129,6 +137,7 @@ export const services: Service[] = [
   {
     slug: "mobile-apps",
     name: "Mobile Apps",
+    shortName: "Mobile Apps",
     family: "build",
     headlineWord: "Mobile",
     summary: "iOS and Android apps, cross-platform or native, from first build to store launch.",
@@ -142,6 +151,7 @@ export const services: Service[] = [
   {
     slug: "digital-marketing-seo",
     name: "Digital Marketing & SEO",
+    shortName: "SEO",
     family: "grow",
     headlineWord: "Search",
     summary: "Technical SEO, content and conversion work that compounds month over month.",
@@ -155,6 +165,7 @@ export const services: Service[] = [
   {
     slug: "social-media-meta-ads",
     name: "Social Media & Meta Ads",
+    shortName: "Meta Ads",
     family: "grow",
     headlineWord: "Social",
     summary: "Organic social and paid campaigns on Meta and beyond, managed against cost per result.",

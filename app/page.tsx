@@ -2,6 +2,7 @@ import Link from "next/link";
 import { GrowingMark } from "@/components/brand/GrowingMark";
 import { HowWeWork } from "@/components/home/HowWeWork";
 import { MazeMold } from "@/components/hero/MazeMold";
+import { IntroSequence } from "@/components/intro/IntroSequence";
 import { ServiceHero } from "@/components/hero/ServiceHero";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Section } from "@/components/ui/Section";
@@ -31,6 +32,7 @@ const principles = [
 export default function Home() {
   return (
     <>
+      <IntroSequence />
       <section className="relative overflow-hidden pt-14 pb-16 md:pt-20 md:pb-24">
         <MazeMold className="absolute inset-0 h-full w-full [mask-image:radial-gradient(ellipse_at_50%_45%,#000_45%,transparent_92%)]" />
         <div className="relative">

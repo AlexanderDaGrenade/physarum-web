@@ -218,7 +218,7 @@ export function MoldTrail() {
   }, [geo]);
 
   return (
-    <div ref={rootRef} className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div ref={rootRef} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
       {geo && (
         <svg width={geo.w} height={geo.h} className="absolute inset-0">
           <path ref={glowRef} d={geo.spine} fill="none" stroke="var(--mold-soft)" strokeWidth={geo.mobile ? 7 : 10} strokeLinecap="round" />

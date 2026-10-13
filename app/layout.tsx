@@ -4,6 +4,7 @@ import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/site/Footer";
 import { ThemeProvider } from "@/components/site/ThemeProvider";
 import { MoldTrail } from "@/components/trail/MoldTrail";
+import { INTRO_KEY } from "@/lib/intro-route";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -22,15 +23,23 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Decide before first paint whether the homepage intro should play, so it never flashes. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("${INTRO_KEY}")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-done")}catch(e){document.documentElement.classList.add("intro-done")}`,
+          }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <noscript>
-          <style>{"[data-trail-section]{opacity:1!important}"}</style>
+          <style>{"[data-trail-section]{opacity:1!important}#intro{display:none}"}</style>
         </noscript>
         <ThemeProvider>
           <Nav />
           <div className="relative">
             <MoldTrail />
-            <main className="relative z-10 pt-16">{children}</main>
+            <main className="relative pt-16">{children}</main>
           </div>
           <Footer />
         </ThemeProvider>
