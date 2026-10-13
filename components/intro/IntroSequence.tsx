@@ -251,7 +251,7 @@ export function IntroSequence() {
       });
 
       const write = clamp((t - travelEnd) / WRITE);
-      wordClipRef.current?.setAttribute("width", String(geo.wordW * write + 4));
+      wordClipRef.current?.setAttribute("width", String(write > 0 ? geo.wordW * write + 4 : 0));
 
       const zoomStart = travelEnd + WRITE + HOLD;
       if (t >= zoomStart) {
