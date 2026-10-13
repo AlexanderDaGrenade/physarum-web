@@ -36,7 +36,7 @@ const VARIANT = {
   follow: { travel: 3.2, dwell: 0.7, line: [6, 10], label: [1.5, 1.3], camera: true, ease: true },
 } as const;
 // Follow camera
-const CAM_ZOOM = { desktop: 1.7, mobile: 1.6 };
+const CAM_ZOOM = { desktop: 1.7, mobile: 1.3 };
 const CAM_EASE = 6; // higher = tighter tracking
 const PULLBACK = 1.3; // s to pull back to the whole path
 const HOLD_FULL = 0.7; // s showing the whole path
@@ -344,6 +344,12 @@ export function IntroSequence() {
         const k = 1 - Math.exp(-dt * CAM_EASE);
         cam.x += (target.x - cam.x) * k;
         cam.y += (target.y - cam.y) * k;
+        if (layout.frameLabels && t >= LINE_START) {
+          // Never let the head drift out of frame: keep it within the middle 70% of the view.
+          const v = followView(cam);
+          cam.x = Math.min(p.x + v.w * 0.35, Math.max(p.x - v.w * 0.35, cam.x));
+          cam.y = Math.min(p.y + v.h * 0.35, Math.max(p.y - v.h * 0.35, cam.y));
+        }
         const near = followView(cam);
         const far = fullView();
         const b = ease(clamp((t - pullStart) / PULLBACK));
