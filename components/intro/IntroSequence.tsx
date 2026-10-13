@@ -3,23 +3,42 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GrowingMark } from "@/components/brand/GrowingMark";
 import { WORD_PATH } from "@/components/brand/logo-paths";
-import { CELL, INTRO_KEY, desktopLayout, mobileLayout, type IntroLayout, type LabelPos } from "@/lib/intro-route";
+import {
+  CELL,
+  DEFAULT_INTRO,
+  desktopLayout,
+  mobileLayout,
+  type IntroLayout,
+  type IntroVariant,
+  type LabelPos,
+} from "@/lib/intro-route";
 import { services } from "@/lib/services";
 
 /**
- * Opening sequence (homepage, once per session): the mark grows in the centre
- * of a faint maze, a single line leaves it and visits every service, reaches
- * the exit where the wordmark writes itself in, and the site is revealed
- * through the line's head. Skippable; skipped entirely for reduced motion
- * (see the inline script in app/layout.tsx).
+ * Opening sequence (homepage, every load): the mark grows in the centre of a
+ * faint maze, a single line leaves it and visits every service, reaches the
+ * exit where the wordmark writes itself in, and the site is revealed through
+ * the line's head. Skippable; skipped entirely for reduced motion (see the
+ * inline script in app/layout.tsx).
+ *
+ * Two variants share the route: "follow" (camera tracks the line, then pulls
+ * back to show the whole path) and "classic" (fixed bird's-eye view).
  */
 
 const LINE_START = 1.0; // s, after the mark has started growing
 const TRAVEL = 5.4; // s spent moving
-const DWELL = 0.15; // s pause at each service
 const WRITE = 0.6;
 const HOLD = 0.35;
 const ZOOM = 0.9;
+const VARIANT = {
+  classic: { dwell: 0.15, line: [3, 5], camera: false },
+  follow: { dwell: 0.28, line: [6, 10], camera: true },
+} as const;
+// Follow camera
+const CAM_ZOOM = { desktop: 2, mobile: 1.8 };
+const CAM_EASE = 4.5; // higher = tighter tracking
+const PULLBACK = 1.3; // s to pull back to the whole path
+const HOLD_FULL = 0.7; // s showing the whole path
 const WORD_BOX = { x: 395.8, y: 578.1, w: 804, h: 74.8 };
 
 const N = 1, E = 2, S = 4, W = 8;
@@ -153,6 +172,7 @@ function labelProps(s: Stop, fs: number) {
 
 export function IntroSequence() {
   const [layout, setLayout] = useState<IntroLayout | null>(null);
+  const [variant, setVariant] = useState<IntroVariant>(DEFAULT_INTRO);
   const [gone, setGone] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -172,9 +192,8 @@ export function IntroSequence() {
       setGone(true);
       return;
     }
-    try {
-      sessionStorage.setItem(INTRO_KEY, "1");
-    } catch {}
+    const forced = new URLSearchParams(window.location.search).get("intro");
+    if (forced === "follow" || forced === "classic") setVariant(forced);
     html.style.overflow = "hidden";
     setLayout(window.innerWidth / window.innerHeight >= 1 ? desktopLayout : mobileLayout);
   }, []);
@@ -189,11 +208,37 @@ export function IntroSequence() {
     if (!root || !svg || !line || !head) return;
     const html = document.documentElement;
     const { pts, cum, total, stops } = geo;
+    const V = VARIANT[variant];
+    const DWELL = V.dwell;
 
     // Time → distance along the route, pausing briefly at each service.
     const speed = total / TRAVEL;
     const marks = stops.map((s, i) => ({ at: s.at, t: LINE_START + s.at / speed + i * DWELL }));
     const travelEnd = LINE_START + TRAVEL + stops.length * DWELL;
+
+    // Camera (follow variant): a viewBox that tracks the head, then pulls back.
+    const fullView = () => {
+      const aspect = svg.clientWidth / Math.max(1, svg.clientHeight);
+      const w = aspect > layout.width / layout.height ? layout.height * aspect : layout.width;
+      const h = w / aspect;
+      return { x: (layout.width - w) / 2, y: (layout.height - h) / 2, w, h };
+    };
+    const zoom = layout.short ? CAM_ZOOM.mobile : CAM_ZOOM.desktop;
+    const followView = (c: { x: number; y: number }) => {
+      const f = fullView();
+      const w = f.w / zoom;
+      const h = f.h / zoom;
+      return { x: c.x - w / 2, y: c.y - h / 2, w, h };
+    };
+    const wordCenter = { x: layout.word.x + geo.wordW / 2, y: layout.word.cy };
+    const cam = { x: layout.mark.cx, y: layout.mark.cy };
+    const pullStart = travelEnd + WRITE + 0.15;
+    const zoomStart = V.camera ? pullStart + PULLBACK + HOLD_FULL : travelEnd + WRITE + HOLD;
+    const ease = (k: number) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+    let lastT = 0;
+    const setView = (v: { x: number; y: number; w: number; h: number }) =>
+      svg.setAttribute("viewBox", `${v.x} ${v.y} ${v.w} ${v.h}`);
+    if (V.camera) setView(followView(cam));
     const distAt = (t: number) => {
       if (t <= LINE_START) return 0;
       let base = LINE_START;
@@ -237,9 +282,27 @@ export function IntroSequence() {
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
       const t = (now - t0) / 1000;
+      const dt = Math.min(0.1, t - lastT);
+      lastT = t;
       const dist = distAt(t);
       line.style.strokeDashoffset = String(total - dist);
       const p = pointAt(dist);
+
+      if (V.camera) {
+        const target = t < LINE_START ? cam : t >= travelEnd - 0.4 ? wordCenter : p;
+        const k = 1 - Math.exp(-dt * CAM_EASE);
+        cam.x += (target.x - cam.x) * k;
+        cam.y += (target.y - cam.y) * k;
+        const near = followView(cam);
+        const far = fullView();
+        const b = ease(clamp((t - pullStart) / PULLBACK));
+        setView({
+          x: near.x + (far.x - near.x) * b,
+          y: near.y + (far.y - near.y) * b,
+          w: near.w + (far.w - near.w) * b,
+          h: near.h + (far.h - near.h) * b,
+        });
+      }
       head.setAttribute("transform", `translate(${p.x} ${p.y})`);
       head.style.opacity = t >= LINE_START ? "1" : "0";
 
@@ -253,7 +316,6 @@ export function IntroSequence() {
       const write = clamp((t - travelEnd) / WRITE);
       wordClipRef.current?.setAttribute("width", String(write > 0 ? geo.wordW * write + 4 : 0));
 
-      const zoomStart = travelEnd + WRITE + HOLD;
       if (t >= zoomStart) {
         const z = clamp((t - zoomStart) / ZOOM);
         const ctm = svg.getScreenCTM();
@@ -281,7 +343,7 @@ export function IntroSequence() {
       window.removeEventListener("touchmove", skip);
       html.style.overflow = "";
     };
-  }, [geo, layout]);
+  }, [geo, layout, variant]);
 
   if (gone) return null;
 
@@ -330,7 +392,7 @@ export function IntroSequence() {
             d={geo.d}
             fill="none"
             stroke="var(--mold)"
-            strokeWidth={layout.short ? 5 : 3}
+            strokeWidth={VARIANT[variant].line[layout.short ? 1 : 0]}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeDasharray="0 99999"
@@ -384,8 +446,8 @@ export function IntroSequence() {
           </g>
 
           <g ref={headRef} style={{ opacity: 0 }}>
-            <circle r={fs * 0.9} fill="var(--mold)" opacity="0.18" />
-            <circle r={fs * 0.38} fill="var(--mold)" />
+            <circle r={fs * (variant === "follow" ? 1.2 : 0.9)} fill="var(--mold)" opacity="0.18" />
+            <circle r={fs * (variant === "follow" ? 0.55 : 0.38)} fill="var(--mold)" />
           </g>
         </svg>
       )}

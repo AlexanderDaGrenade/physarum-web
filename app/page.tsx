@@ -70,7 +70,7 @@ export default function Home() {
         <HowWeWork />
       </Section>
 
-      <Section eyebrow="Capabilities" title="Nine services, three ways in.">
+      <Section eyebrow="Capabilities" title="Eight services, three ways in.">
         <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
           {families.map((f) => (
             <Link key={f.slug} href={`/services/${f.slug}`} className="group bg-bg p-6 transition hover:bg-card md:p-8">

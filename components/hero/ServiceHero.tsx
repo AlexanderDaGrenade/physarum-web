@@ -203,7 +203,7 @@ export function ServiceHero() {
       <h1 className="mx-auto max-w-5xl px-4 text-center [text-shadow:0_0_18px_var(--bg),0_0_36px_var(--bg)] text-4xl leading-[1.05] font-semibold tracking-tight md:text-7xl">
         <span className="block">Intelligence that navigates</span>
         <span ref={wordRef} className="inline-block min-h-[1.1em]" aria-hidden="true">
-          <span key={word} className="word-in inline-block">
+          <span key={word} className="word-in word-gradient inline-block">
             {word}
           </span>
         </span>

@@ -19,20 +19,22 @@ export type Family = {
   intro: string;
 };
 
+// Order matters: menus, footer and service pages list families and services in this order,
+// and the hero carousel and intro follow the `services` array exactly.
 export const families: Family[] = [
-  {
-    slug: "ai-data",
-    name: "AI & Data",
-    tagline: "The data, measurement and automation behind capable models.",
-    intro:
-      "We build the training data, benchmarks and evaluations that tell you what a model can really do — and the automations that put it to work.",
-  },
   {
     slug: "build",
     name: "Build",
-    tagline: "Products on the web and in your pocket, AI built in where it earns its place.",
+    tagline: "Software, web and mobile products, AI built in where it earns its place.",
     intro:
-      "From first prototype to production, we design and engineer web apps, AI-powered products and mobile apps that people actually use.",
+      "From first prototype to production, we design and engineer software, web services and mobile apps that people actually use.",
+  },
+  {
+    slug: "ai-data",
+    name: "AI & Data",
+    tagline: "The automation, data and measurement behind capable models.",
+    intro:
+      "We automate real work with AI, and build the fine-tuning data and evaluations that tell you what a model can really do.",
   },
   {
     slug: "grow",
@@ -45,49 +47,19 @@ export const families: Family[] = [
 
 export const services: Service[] = [
   {
-    slug: "llm-training-data",
-    name: "LLM Training Data",
-    shortName: "Training Data",
-    family: "ai-data",
-    headlineWord: "Training Data",
+    slug: "software-applications",
+    name: "Software Applications",
+    shortName: "Software",
+    family: "build",
+    headlineWord: "Software",
     summary:
-      "Expert-written SFT, preference and reasoning data across domains and languages, with QA you can audit.",
+      "Custom software and SaaS products, from internal tools to AI-powered platforms — built to be maintained.",
     deliverables: [
-      "Supervised fine-tuning datasets",
-      "RLHF / preference pairs",
-      "Multi-step reasoning & tool-use traces",
-      "Multilingual and domain-expert annotation",
-      "Inter-annotator agreement and QA reports",
-    ],
-  },
-  {
-    slug: "llm-benchmarking",
-    name: "LLM Benchmarking",
-    shortName: "Benchmarking",
-    family: "ai-data",
-    headlineWord: "Benchmarks",
-    summary:
-      "Private, contamination-resistant benchmarks that measure the capabilities you care about.",
-    deliverables: [
-      "Custom benchmark design",
-      "Held-out, private test sets",
-      "Agentic and long-horizon tasks",
-      "Leaderboards and model comparisons",
-    ],
-  },
-  {
-    slug: "evals",
-    name: "Evals",
-    shortName: "Evals",
-    family: "ai-data",
-    headlineWord: "Evaluation",
-    summary:
-      "Rubrics, graders and harnesses that turn “seems better” into a number you can ship on.",
-    deliverables: [
-      "Rubric and grader design",
-      "Automated eval harnesses",
-      "Human and LLM-as-judge pipelines",
-      "Regression suites for releases",
+      "Product discovery and UX design",
+      "SaaS platforms and internal tools",
+      "AI-powered features: copilots, retrieval, generation",
+      "APIs, integrations and data pipelines",
+      "Testing, CI/CD and handover",
     ],
   },
   {
@@ -106,37 +78,22 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "web-apps",
-    name: "Web Apps",
-    shortName: "Web Apps",
+    slug: "web-services",
+    name: "Web Services",
+    shortName: "Web Services",
     family: "build",
     headlineWord: "the Web",
-    summary: "Fast, accessible, maintainable web applications — from SaaS dashboards to marketplaces.",
+    summary: "Fast, accessible websites and web apps — from marketing sites to dashboards and e-commerce.",
     deliverables: [
-      "Product and UX design",
-      "React / Next.js front-ends",
-      "APIs, databases and auth",
-      "Hosting, CI/CD and handover",
+      "Websites and landing pages",
+      "Web apps and dashboards (React / Next.js)",
+      "E-commerce builds",
+      "Hosting, performance and maintenance",
     ],
   },
   {
-    slug: "ai-web-apps",
-    name: "AI Web Apps",
-    shortName: "AI Web Apps",
-    family: "build",
-    headlineWord: "AI Products",
-    summary:
-      "Products with LLMs at the core: copilots, retrieval, chat and generation — evaluated before they ship.",
-    deliverables: [
-      "RAG and search over your data",
-      "Copilots and chat interfaces",
-      "Model selection and cost control",
-      "Built-in evals and guardrails",
-    ],
-  },
-  {
-    slug: "mobile-apps",
-    name: "Mobile Apps",
+    slug: "mobile-applications",
+    name: "Mobile Applications",
     shortName: "Mobile Apps",
     family: "build",
     headlineWord: "Mobile",
@@ -174,6 +131,38 @@ export const services: Service[] = [
       "Meta (Facebook & Instagram) ads",
       "Creative testing",
       "Reporting on spend and return",
+    ],
+  },
+  {
+    slug: "llm-fine-tuning-datasets",
+    name: "LLM Fine-Tuning Datasets",
+    shortName: "Fine-Tuning Data",
+    family: "ai-data",
+    headlineWord: "Training Data",
+    summary:
+      "Expert-written SFT, preference and reasoning datasets across domains and languages, with QA you can audit.",
+    deliverables: [
+      "Supervised fine-tuning datasets",
+      "RLHF / preference pairs",
+      "Multi-step reasoning & tool-use traces",
+      "Multilingual and domain-expert annotation",
+      "Inter-annotator agreement and QA reports",
+    ],
+  },
+  {
+    slug: "llm-benchmarking-evaluation",
+    name: "LLM Benchmarking & Evaluation",
+    shortName: "Benchmarks & Evals",
+    family: "ai-data",
+    headlineWord: "Evaluation",
+    summary:
+      "Private benchmarks, rubrics and eval harnesses that turn “seems better” into a number you can ship on.",
+    deliverables: [
+      "Custom, contamination-resistant benchmarks",
+      "Agentic and long-horizon tasks",
+      "Rubric and grader design, human and LLM-as-judge",
+      "Automated eval harnesses and release regression suites",
+      "Leaderboards and model comparisons",
     ],
   },
 ];

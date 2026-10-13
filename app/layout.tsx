@@ -4,7 +4,6 @@ import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/site/Footer";
 import { ThemeProvider } from "@/components/site/ThemeProvider";
 import { MoldTrail } from "@/components/trail/MoldTrail";
-import { INTRO_KEY } from "@/lib/intro-route";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -24,10 +23,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Decide before first paint whether the homepage intro should play, so it never flashes. */}
+        {/* Skip the homepage intro before first paint for reduced-motion users, so it never flashes. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem("${INTRO_KEY}")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-done")}catch(e){document.documentElement.classList.add("intro-done")}`,
+            __html: `try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-done")}catch(e){}`,
           }}
         />
       </head>

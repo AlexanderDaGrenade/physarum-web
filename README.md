@@ -25,6 +25,7 @@ Copy `.env.example` to `.env.local` (and set the same vars in Vercel):
 - **Case studies:** metadata in `lib/work.ts`, body in `content/work/<slug>.mdx`
 - **Logo:** `components/brand/logo-paths.ts` (traced from `brand/source/physarum-1.jpeg`), SVG files in `public/brand/`
 - **Hero:** `components/hero/MazeMold.tsx` (mold solving a faded maze, looping), `ServiceHero.tsx` (headline + revolving carousel + tendril), `components/brand/GrowingMark.tsx`
+- **Opening intro:** `components/intro/IntroSequence.tsx` + routes in `lib/intro-route.ts`. Plays on every homepage load (skippable; skipped for reduced motion). Default variant is `DEFAULT_INTRO` in `lib/intro-route.ts`: `"follow"` (camera tracks the line, then pulls back) or `"classic"` (original bird's-eye). Force either with `?intro=follow` / `?intro=classic`.
 - **Scroll trail:** `components/trail/MoldTrail.tsx` — any page with a `[data-trail-start]` element and `<Section>`s gets the trail; sections fade in when it reaches their node
 
 ## Before launch
