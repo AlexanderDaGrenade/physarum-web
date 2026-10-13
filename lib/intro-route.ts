@@ -4,7 +4,7 @@ import type { FamilySlug } from "./services";
  * Hand-placed routes for the opening animation. Coordinates are maze grid cells
  * (cell = 50 units; centre of cell c is c * 50 + 25). The line starts inside the
  * logo mark, visits every service category, and ends at the maze exit. With
- * `touchWord`, a final horizontal run into the wordmark is added so the head touches the "P".
+ * `touchWord`, a final horizontal run toward the wordmark is added so the head stops just beside the "P".
  */
 
 export type LabelPos = "above" | "below" | "left" | "right" | "above-left";
@@ -23,7 +23,7 @@ export type IntroLayout = {
   word: { x: number; cy: number; h: number };
   /** Follow camera eases onto each dot + label and stays inside the maze bounds. */
   frameLabels: boolean;
-  /** Finish with a horizontal run so the head touches the wordmark's "P". */
+  /** Finish with a horizontal run so the head arrives level with the wordmark, just short of its "P". */
   touchWord: boolean;
   route: RouteStep[];
 };

@@ -76,11 +76,12 @@ function buildGeometry(L: IntroLayout) {
       stops.push({ x: px(c), y: px(r), label: L.short ? f.shortName : f.name, pos: step.label });
     }
   }
-  // Finish with a horizontal run from the left so the head touches the wordmark's "P".
+  // Finish with a horizontal run from the left so the head stops just beside the wordmark's "P".
   if (L.touchWord) {
     const last = pts[pts.length - 1];
     if (last.y !== L.word.cy) pts.push({ x: last.x, y: L.word.cy });
-    pts.push({ x: L.word.x - L.fontSize * 0.35, y: L.word.cy });
+    // Stop just short of the "P": head radius (~0.55 × font size) plus a small gap.
+    pts.push({ x: L.word.x - L.fontSize * 1.05, y: L.word.cy });
   }
 
   const cum = [0];
