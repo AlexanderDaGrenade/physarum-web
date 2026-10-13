@@ -33,11 +33,11 @@ const ZOOM = 0.9;
 // [desktop, mobile]; ease = slow into and out of each stop instead of constant speed.
 const VARIANT = {
   classic: { travel: 5.4, dwell: 0.15, line: [3, 5], label: [1, 1], camera: false, ease: false },
-  follow: { travel: 6.5, dwell: 0.7, line: [6, 10], label: [1.5, 1.3], camera: true, ease: true },
+  follow: { travel: 3.2, dwell: 0.7, line: [6, 10], label: [1.5, 1.3], camera: true, ease: true },
 } as const;
 // Follow camera
 const CAM_ZOOM = { desktop: 1.7, mobile: 1.6 };
-const CAM_EASE = 3.5; // higher = tighter tracking
+const CAM_EASE = 6; // higher = tighter tracking
 const PULLBACK = 1.3; // s to pull back to the whole path
 const HOLD_FULL = 0.7; // s showing the whole path
 const WORD_BOX = { x: 395.8, y: 578.1, w: 804, h: 74.8 };
