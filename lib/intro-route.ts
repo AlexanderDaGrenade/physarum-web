@@ -1,12 +1,14 @@
+import type { FamilySlug } from "./services";
+
 /**
  * Hand-placed routes for the opening animation. Coordinates are maze grid cells
  * (cell = 50 units; centre of cell c is c * 50 + 25). The line starts inside the
- * logo mark, visits every service, and ends at the maze exit beside the wordmark.
+ * logo mark, visits every service category, and ends at the maze exit beside the wordmark.
  */
 
 export type LabelPos = "above" | "below" | "left" | "right" | "above-left";
 
-export type RouteStep = [number, number] | { at: [number, number]; service: string; label: LabelPos };
+export type RouteStep = [number, number] | { at: [number, number]; category: FamilySlug; label: LabelPos };
 
 export type IntroLayout = {
   width: number;
@@ -44,27 +46,27 @@ export const desktopLayout: IntroLayout = {
     [15.5, 8],
     [17, 8],
     [17, 5],
-    { at: [22, 5], service: "software-applications", label: "above" },
+    { at: [22, 5], category: "ai-llm-solutions", label: "above" },
     [27, 5],
-    { at: [27, 2], service: "ai-automation", label: "right" },
-    { at: [17, 2], service: "web-services", label: "above" },
+    [27, 2],
+    { at: [17, 2], category: "custom-software-mobile-apps", label: "above" },
     [13, 2],
     [13, 4],
     [8, 4],
-    { at: [8, 2], service: "mobile-applications", label: "above" },
+    [8, 2],
     [3, 2],
-    { at: [3, 6], service: "digital-marketing-seo", label: "right" },
+    { at: [3, 6], category: "web-development-services", label: "right" },
     [3, 9],
     [6, 9],
-    { at: [6, 11], service: "social-media-meta-ads", label: "right" },
+    [6, 11],
     [6, 13],
     [2, 13],
     [2, 15],
-    { at: [4, 15], service: "llm-fine-tuning-datasets", label: "below" },
+    { at: [4, 15], category: "digital-marketing-seo", label: "below" },
     [9, 15],
     [9, 13],
     [13, 13],
-    { at: [13, 15], service: "llm-benchmarking-evaluation", label: "below" },
+    { at: [13, 15], category: "social-media-paid-advertising", label: "below" },
     [17, 15],
     [17, 12],
     [20, 12],
@@ -87,26 +89,26 @@ export const mobileLayout: IntroLayout = {
     [8.5, 15],
     [11, 15],
     [11, 11],
-    { at: [14, 11], service: "software-applications", label: "above-left" },
+    { at: [14, 11], category: "ai-llm-solutions", label: "above-left" },
     [14, 7],
     [16, 7],
-    { at: [16, 4], service: "ai-automation", label: "above-left" },
+    [16, 4],
     [11, 4],
     [11, 2],
-    { at: [6, 2], service: "web-services", label: "above" },
+    { at: [6, 2], category: "custom-software-mobile-apps", label: "above" },
     [6, 5],
     [2, 5],
-    { at: [2, 8], service: "mobile-applications", label: "right" },
+    { at: [2, 8], category: "web-development-services", label: "right" },
     [2, 11],
-    { at: [6, 11], service: "digital-marketing-seo", label: "above" },
+    [6, 11],
     [6, 14],
     [3, 14],
-    { at: [3, 19], service: "social-media-meta-ads", label: "right" },
+    { at: [3, 19], category: "digital-marketing-seo", label: "right" },
     [3, 22],
-    { at: [8, 22], service: "llm-fine-tuning-datasets", label: "above" },
+    [8, 22],
     [8, 25],
     [14, 25],
-    { at: [14, 21], service: "llm-benchmarking-evaluation", label: "above-left" },
+    { at: [14, 21], category: "social-media-paid-advertising", label: "above-left" },
     [16, 21],
     [16, 28],
     [2, 28],

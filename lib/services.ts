@@ -1,47 +1,73 @@
-export type FamilySlug = "ai-data" | "build" | "grow";
+export type FamilySlug =
+  | "ai-llm-solutions"
+  | "custom-software-mobile-apps"
+  | "web-development-services"
+  | "digital-marketing-seo"
+  | "social-media-paid-advertising";
 
 export type Service = {
   slug: string;
   name: string;
-  /** Compact label for tight spaces (intro animation on phones). */
-  shortName: string;
   family: FamilySlug;
-  /** Last word of the hero line "Intelligence that navigates ___". */
-  headlineWord: string;
   summary: string;
   deliverables: string[];
 };
 
+/** A service category: the top-level grouping used across the site. */
 export type Family = {
   slug: FamilySlug;
   name: string;
+  /** Compact label for tight spaces (intro animation on phones). */
+  shortName: string;
+  /** Last word of the hero line "Intelligence that navigates ___". */
+  headlineWord: string;
   tagline: string;
   intro: string;
 };
 
-// Order matters: menus, footer and service pages list families and services in this order,
-// and the hero carousel and intro follow the `services` array exactly.
+// Order matters: the intro, hero carousel, menus, footer and pages all follow this order.
 export const families: Family[] = [
   {
-    slug: "build",
-    name: "Build",
-    tagline: "Software, web and mobile products, AI built in where it earns its place.",
+    slug: "ai-llm-solutions",
+    name: "AI & LLM Solutions",
+    shortName: "AI & LLM",
+    headlineWord: "AI & LLMs",
+    tagline: "Automation, fine-tuning data and evaluation for capable models.",
     intro:
-      "From first prototype to production, we design and engineer software, web services and mobile apps that people actually use.",
+      "We automate real work with AI, and build the fine-tuning datasets and benchmarks that tell you what a model can really do.",
   },
   {
-    slug: "ai-data",
-    name: "AI & Data",
-    tagline: "The automation, data and measurement behind capable models.",
+    slug: "custom-software-mobile-apps",
+    name: "Custom Software & Mobile Apps",
+    shortName: "Software & Mobile",
+    headlineWord: "Software",
+    tagline: "Custom software and mobile apps, AI built in where it earns its place.",
     intro:
-      "We automate real work with AI, and build the fine-tuning data and evaluations that tell you what a model can really do.",
+      "From first prototype to production, we design and engineer software and mobile apps that people actually use.",
   },
   {
-    slug: "grow",
-    name: "Grow",
+    slug: "web-development-services",
+    name: "Web Development Services",
+    shortName: "Web Development",
+    headlineWord: "the Web",
+    tagline: "Fast, accessible websites and web apps.",
+    intro: "Marketing sites, web apps, dashboards and e-commerce — built fast, accessible and easy to maintain.",
+  },
+  {
+    slug: "digital-marketing-seo",
+    name: "Digital Marketing & SEO",
+    shortName: "Marketing & SEO",
+    headlineWord: "Search",
     tagline: "Get found, get chosen, get measured.",
-    intro:
-      "Search, social and paid media run as one system — every campaign tied to numbers you can read.",
+    intro: "Technical SEO, content and conversion work that compounds month over month — tied to numbers you can read.",
+  },
+  {
+    slug: "social-media-paid-advertising",
+    name: "Social Media & Paid Advertising",
+    shortName: "Social & Ads",
+    headlineWord: "Social",
+    tagline: "Organic social and paid campaigns, managed against results.",
+    intro: "Social content and paid campaigns on Meta and beyond, run against cost per result rather than likes.",
   },
 ];
 
@@ -49,9 +75,7 @@ export const services: Service[] = [
   {
     slug: "software-applications",
     name: "Software Applications",
-    shortName: "Software",
-    family: "build",
-    headlineWord: "Software",
+    family: "custom-software-mobile-apps",
     summary:
       "Custom software and SaaS products, from internal tools to AI-powered platforms — built to be maintained.",
     deliverables: [
@@ -65,9 +89,7 @@ export const services: Service[] = [
   {
     slug: "ai-automation",
     name: "AI Automation",
-    shortName: "Automation",
-    family: "ai-data",
-    headlineWord: "Automation",
+    family: "ai-llm-solutions",
     summary:
       "Agents and workflows that take repetitive work off your team — integrated with the tools you already run.",
     deliverables: [
@@ -80,9 +102,7 @@ export const services: Service[] = [
   {
     slug: "web-services",
     name: "Web Services",
-    shortName: "Web Services",
-    family: "build",
-    headlineWord: "the Web",
+    family: "web-development-services",
     summary: "Fast, accessible websites and web apps — from marketing sites to dashboards and e-commerce.",
     deliverables: [
       "Websites and landing pages",
@@ -94,9 +114,7 @@ export const services: Service[] = [
   {
     slug: "mobile-applications",
     name: "Mobile Applications",
-    shortName: "Mobile Apps",
-    family: "build",
-    headlineWord: "Mobile",
+    family: "custom-software-mobile-apps",
     summary: "iOS and Android apps, cross-platform or native, from first build to store launch.",
     deliverables: [
       "iOS and Android (React Native / native)",
@@ -108,9 +126,7 @@ export const services: Service[] = [
   {
     slug: "digital-marketing-seo",
     name: "Digital Marketing & SEO",
-    shortName: "SEO",
-    family: "grow",
-    headlineWord: "Search",
+    family: "digital-marketing-seo",
     summary: "Technical SEO, content and conversion work that compounds month over month.",
     deliverables: [
       "Technical SEO audits and fixes",
@@ -122,9 +138,7 @@ export const services: Service[] = [
   {
     slug: "social-media-meta-ads",
     name: "Social Media & Meta Ads",
-    shortName: "Meta Ads",
-    family: "grow",
-    headlineWord: "Social",
+    family: "social-media-paid-advertising",
     summary: "Organic social and paid campaigns on Meta and beyond, managed against cost per result.",
     deliverables: [
       "Social strategy and content calendars",
@@ -136,9 +150,7 @@ export const services: Service[] = [
   {
     slug: "llm-fine-tuning-datasets",
     name: "LLM Fine-Tuning Datasets",
-    shortName: "Fine-Tuning Data",
-    family: "ai-data",
-    headlineWord: "Training Data",
+    family: "ai-llm-solutions",
     summary:
       "Expert-written SFT, preference and reasoning datasets across domains and languages, with QA you can audit.",
     deliverables: [
@@ -152,9 +164,7 @@ export const services: Service[] = [
   {
     slug: "llm-benchmarking-evaluation",
     name: "LLM Benchmarking & Evaluation",
-    shortName: "Benchmarks & Evals",
-    family: "ai-data",
-    headlineWord: "Evaluation",
+    family: "ai-llm-solutions",
     summary:
       "Private benchmarks, rubrics and eval harnesses that turn “seems better” into a number you can ship on.",
     deliverables: [

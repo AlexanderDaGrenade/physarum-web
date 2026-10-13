@@ -25,7 +25,7 @@ export function ContactForm() {
       </div>
       <fieldset>
         <legend className="text-sm">What do you need?</legend>
-        <div className="mt-2 grid gap-2 sm:grid-cols-3">
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
           {families.map((fam) => (
             <label key={fam.slug} className="flex cursor-pointer items-center gap-3 rounded-xl border border-line bg-card px-4 py-3 text-sm has-[:checked]:border-mold">
               <input type="radio" name="family" value={fam.slug} defaultChecked={f.family === fam.slug} required className="accent-[var(--mold)]" />

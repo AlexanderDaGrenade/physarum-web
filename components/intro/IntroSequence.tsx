@@ -12,11 +12,11 @@ import {
   type IntroVariant,
   type LabelPos,
 } from "@/lib/intro-route";
-import { services } from "@/lib/services";
+import { families } from "@/lib/services";
 
 /**
  * Opening sequence (homepage, every load): the mark grows in the centre of a
- * faint maze, a single line leaves it and visits every service, reaches the
+ * faint maze, a single line leaves it and visits every service category, reaches the
  * exit where the wordmark writes itself in, and the site is revealed through
  * the line's head. Skippable; skipped entirely for reduced motion (see the
  * inline script in app/layout.tsx).
@@ -72,8 +72,8 @@ function buildGeometry(L: IntroLayout) {
     const [c, r] = Array.isArray(step) ? step : step.at;
     pts.push({ x: px(c), y: px(r) });
     if (!Array.isArray(step)) {
-      const s = services.find((sv) => sv.slug === step.service)!;
-      stops.push({ x: px(c), y: px(r), label: L.short ? s.shortName : s.name, pos: step.label });
+      const f = families.find((fam) => fam.slug === step.category)!;
+      stops.push({ x: px(c), y: px(r), label: L.short ? f.shortName : f.name, pos: step.label });
     }
   }
   const cum = [0];

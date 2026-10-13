@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { families, serviceHref, services } from "@/lib/services";
+import { families, servicesByFamily } from "@/lib/services";
 
-const COPIES = 3; // the middle copy is the "real" one; the outer copies make the loop seamless
+const COPIES = 4; // the second copy is the "real" one; the others make the loop seamless
 const SPEED = 38; // px per second
-const familyName = (slug: string) => families.find((f) => f.slug === slug)?.name ?? "";
 
 /**
  * "Intelligence that navigates ___" — the last word follows the service card
@@ -14,7 +13,7 @@ const familyName = (slug: string) => families.find((f) => f.slug === slug)?.name
  * A mold tendril links the word to that card.
  */
 export function ServiceHero() {
-  const n = services.length;
+  const n = families.length;
   const stageRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -48,7 +47,7 @@ export function ServiceHero() {
     const unit = s.cardW + s.gap;
     const setW = n * unit;
     s.offset = ((s.offset % setW) + setW) % setW;
-    const shift = s.offset + setW; // start inside the middle copy
+    const shift = s.offset + setW; // start inside the second copy
     const center = stage.clientWidth / 2;
     track.style.transform = `translate3d(${-shift}px,0,0)`;
     let centerIdx = 0;
@@ -196,7 +195,7 @@ export function ServiceHero() {
     p.style.animation = "draw 0.6s cubic-bezier(0.3,0.7,0.2,1) both";
   }, [tendril]);
 
-  const word = services[active].headlineWord;
+  const word = families[active].headlineWord;
 
   return (
     <div ref={heroRef} className="relative">
@@ -230,7 +229,7 @@ export function ServiceHero() {
       >
         <div ref={trackRef} className="flex w-max gap-4 py-6 will-change-transform" role="list">
           {Array.from({ length: COPIES * n }, (_, k) => {
-            const s = services[k % n];
+            const f = families[k % n];
             const real = Math.floor(k / n) === 1;
             const isActive = held === k || (held === null && active === k % n && real);
             return (
@@ -239,7 +238,7 @@ export function ServiceHero() {
                 ref={(el) => {
                   cardRefs.current[k] = el;
                 }}
-                href={serviceHref(s)}
+                href={`/services/${f.slug}`}
                 role="listitem"
                 tabIndex={real ? 0 : -1}
                 aria-hidden={real ? undefined : true}
@@ -252,10 +251,14 @@ export function ServiceHero() {
                   isActive ? "border-mold" : "border-line"
                 }`}
               >
-                <span className="font-mono text-[11px] tracking-widest text-muted uppercase">{familyName(s.family)}</span>
+                <span className="font-mono text-[11px] tracking-widest text-muted uppercase">0{(k % n) + 1}</span>
                 <span>
-                  <span className="block text-xl font-semibold tracking-tight">{s.name}</span>
-                  <span className="mt-2 line-clamp-3 block text-sm text-muted">{s.summary}</span>
+                  <span className="block text-xl font-semibold tracking-tight">{f.name}</span>
+                  <span className="mt-2 line-clamp-3 block text-sm text-muted">
+                    {servicesByFamily(f.slug)
+                      .map((sv) => sv.name)
+                      .join(" · ")}
+                  </span>
                 </span>
               </Link>
             );

@@ -13,8 +13,8 @@ const company = [
 export function Footer() {
   return (
     <footer className="relative z-10 border-t border-line bg-bg">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-5 md:px-8">
-        <div className="md:col-span-2">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:grid-cols-2 md:grid-cols-3 md:px-8 lg:grid-cols-6">
+        <div className="sm:col-span-2 md:col-span-3 lg:col-span-1">
           <Logo className="h-6 w-auto text-fg" />
           <p className="mt-4 max-w-xs text-sm text-muted">
             Named after the slime mold that solves mazes without a map. We find the path through hard problems.

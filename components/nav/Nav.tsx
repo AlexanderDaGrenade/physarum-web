@@ -69,7 +69,7 @@ export function Nav() {
               onClick={(e) => (e.target as HTMLElement).closest("a") && setMegaOpen(false)}
               className="absolute inset-x-0 top-16 border-b border-line bg-bg"
             >
-              <div className="mx-auto grid max-w-7xl grid-cols-3 gap-10 px-8 py-10">
+              <div className="mx-auto grid max-w-7xl grid-cols-5 gap-8 px-8 py-10">
                 {families.map((f) => (
                   <div key={f.slug}>
                     <Link href={`/services/${f.slug}`} className="group mb-4 block">
