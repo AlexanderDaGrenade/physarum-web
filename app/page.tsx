@@ -37,6 +37,18 @@ const principles = [
   },
 ];
 
+// One or two from each kind of work for the homepage; the rest live on /work.
+const featured = [
+  "private-coding-benchmark",
+  "autonomous-agent-platform",
+  "underwriting-knowledge-platform",
+  "ai-personal-assistant-app",
+  "multilingual-reasoning-dataset",
+  "online-therapy-booking",
+]
+  .map((slug) => caseStudies.find((c) => c.slug === slug))
+  .filter((c) => c !== undefined);
+
 export default function Home() {
   return (
     <>
@@ -61,13 +73,16 @@ export default function Home() {
       <Section
         eyebrow="Proven paths"
         title="From the client’s problem to their result."
-        intro="Much of our AI work is under NDA, so some clients appear by description rather than name."
+        intro="Clients appear by description rather than name. Some projects were delivered by our team before Physarum was founded."
       >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {caseStudies.map((c) => (
+          {featured.map((c) => (
             <CaseCard key={c.slug} c={c} />
           ))}
         </div>
+        <Link href="/work" className="mt-8 inline-block text-sm text-muted hover:text-fg">
+          See all {caseStudies.length} projects →
+        </Link>
       </Section>
 
       <Section

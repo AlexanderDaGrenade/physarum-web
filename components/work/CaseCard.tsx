@@ -10,7 +10,11 @@ export function CaseCard({ c }: { c: CaseStudy }) {
     >
       <div className="flex items-center justify-between gap-3 font-mono text-[11px] tracking-widest text-muted uppercase">
         <span>{getFamily(c.family)?.name}</span>
-        {c.draft && <span className="rounded-full border border-line px-2 py-0.5 normal-case tracking-normal">Draft</span>}
+        {c.draft ? (
+          <span className="rounded-full border border-line px-2 py-0.5 normal-case tracking-normal">Draft</span>
+        ) : c.beforePhysarum ? (
+          <span className="rounded-full border border-line px-2 py-0.5 normal-case tracking-normal">Before Physarum</span>
+        ) : null}
       </div>
       <div className="mt-10">
         <h3 className="text-xl leading-snug font-semibold tracking-tight">{c.title}</h3>

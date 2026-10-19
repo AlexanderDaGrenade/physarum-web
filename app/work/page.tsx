@@ -15,7 +15,8 @@ export default function WorkPage() {
         <p className="font-mono text-xs tracking-widest text-muted uppercase">Work</p>
         <h1 className="mt-4 max-w-3xl text-5xl font-semibold tracking-tight md:text-7xl">Paths we’ve found.</h1>
         <p className="mt-6 max-w-2xl text-xl text-muted">
-          Much of our AI work is under NDA, so some clients appear by description rather than name.
+          Much of our work is under NDA, so clients appear by description rather than name. Projects marked “Before Physarum”
+          were delivered by our team before the company was founded.
         </p>
         <span data-trail-start className="mt-10 block size-1" />
       </header>

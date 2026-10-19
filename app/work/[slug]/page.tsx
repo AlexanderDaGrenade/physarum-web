@@ -41,6 +41,12 @@ export default async function CaseStudyPage({ params }: Props) {
             Draft case study — placeholder copy until the real brief is supplied.
           </p>
         )}
+        {c.beforePhysarum && (
+          <p className="mt-6 rounded-xl border border-line bg-card px-4 py-3 text-sm text-muted">
+            Team track record — delivered by members of the Physarum team before the company was founded. Client details are
+            kept private.
+          </p>
+        )}
         <h1 className="mt-6 text-4xl leading-tight font-semibold tracking-tight md:text-6xl">{c.title}</h1>
         <p className="mt-6 text-xl text-muted">{c.outcome}</p>
         <dl className="mt-10 grid gap-6 border-t border-line pt-6 text-sm sm:grid-cols-3">
