@@ -8,16 +8,23 @@ npm run dev     # http://localhost:3000
 npm run build
 ```
 
-## Environment
+## Deploying to physarum.org (Namecheap cPanel)
 
-Copy `.env.example` to `.env.local` (and set the same vars in Vercel):
+The site is exported as static files plus one PHP script for the contact form.
 
-| Variable | Purpose |
-|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Canonical domain, e.g. `https://yourdomain.com` (sitemap, OG, canonical URLs) |
-| `HUBSPOT_PORTAL_ID`, `HUBSPOT_FORM_ID` | Contact form → HubSpot. In production the form refuses to submit if these are missing; in dev it logs the submission. |
-| `NEXT_PUBLIC_CAL_LINK` | Cal.com link (e.g. `physarum/intro`) embedded on `/contact/thanks` |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional email shown on the contact page |
+```bash
+npm run build:cpanel   # builds .next-export/ and physarum-site.zip
+```
+
+1. In cPanel → **File Manager** → `public_html`, delete the old site files (keep `cgi-bin` and `.well-known`).
+2. **Upload** `physarum-site.zip` and **Extract** it into `public_html`. Enable "Show hidden files" to confirm `.htaccess` is there.
+3. In cPanel → **Email Accounts**, make sure `business@physarum.org` exists (the form sends from and to it).
+4. In cPanel → **SSL/TLS Status**, run AutoSSL so `https://physarum.org` works (the `.htaccess` forces HTTPS).
+5. Test: submit the form on `/contact` and check the inbox (and spam folder the first time).
+
+How the form works: `components/site/ContactForm.tsx` posts to `/api/contact.php` (`public/api/contact.php`), which validates the brief,
+rate-limits to 5 per IP per hour, ignores bots via a hidden field, and emails `business@physarum.org` with the client as Reply-To.
+If sending fails, the visitor gets a pre-filled email to the same address instead.
 
 ## Where things live
 
@@ -32,5 +39,5 @@ Copy `.env.example` to `.env.local` (and set the same vars in Vercel):
 
 - [ ] Replace the 6 **draft** case studies (`draft: true` in `lib/work.ts`) with real ones. Drafts show a "Draft" badge, are `noindex`, and are left out of the sitemap.
 - [ ] Register the legal entity, then finish `/privacy` and `/terms` (currently marked Draft).
-- [ ] Set the env vars above and send a test brief through HubSpot.
+- [ ] Upload to cPanel (above) and send a test brief from the live form.
 - [ ] If the designer has the original logo vector or wordmark font, swap it into `logo-paths.ts`.

@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:cpanel": "STATIC_EXPORT=1 NEXT_PUBLIC_SITE_URL=https://physarum.org next build && cd .next-export && zip -qr ../physarum-site.zip . && cd .. && echo \"Upload physarum-site.zip to public_html\""
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

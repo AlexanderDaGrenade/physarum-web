@@ -16,7 +16,7 @@ export default function PrivacyPage() {
       <h2>How we use it</h2>
       <p>To reply to your enquiry, scope and deliver work you ask us for, and keep records of our business correspondence. We don’t sell your information.</p>
       <h2>Who we share it with</h2>
-      <p>Service providers that help us run the business, such as our CRM, scheduling and hosting providers, under their own data-protection terms.</p>
+      <p>Briefs sent through our contact form are emailed to our business inbox via our web host. We share information only with service providers that help us run the business, such as our hosting and email providers, under their own data-protection terms.</p>
       <h2>Your choices</h2>
       <p>You can ask us to access, correct or delete the information we hold about you by contacting us.</p>
     </LegalPage>

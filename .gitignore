@@ -44,3 +44,5 @@ next-env.d.ts
 # local tooling
 .claude/
 /.next-preview/
+/.next-export/
+physarum-site.zip

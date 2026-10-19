@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { families, serviceHref, servicesByFamily } from "@/lib/services";
+import { site } from "@/lib/site";
 
 const company = [
   { href: "/company", label: "About" },
@@ -19,6 +20,9 @@ export function Footer() {
           <p className="mt-4 max-w-xs text-sm text-muted">
             Named after the slime mold that solves mazes without a map. We find the path through hard problems.
           </p>
+          <a href={`mailto:${site.contactEmail}`} className="mt-4 inline-block text-sm text-fg hover:text-mold">
+            {site.contactEmail}
+          </a>
         </div>
         {families.map((f) => (
           <div key={f.slug}>

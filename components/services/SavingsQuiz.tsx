@@ -123,7 +123,7 @@ export function SavingsQuiz() {
             A rough estimate based on typical automation rates for this kind of work. A free audit gives you a real number.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/contact" className="rounded-full bg-fg px-6 py-3 font-medium text-bg transition hover:opacity-85">
+            <Link href="/contact?service=ai-automation-agents" className="rounded-full bg-fg px-6 py-3 font-medium text-bg transition hover:opacity-85">
               Book a free automation audit
             </Link>
             <button

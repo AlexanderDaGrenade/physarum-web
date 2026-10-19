@@ -38,7 +38,7 @@ export default async function FamilyPage({ params }: Props) {
         <h1 className="mt-4 max-w-5xl text-5xl leading-[1.05] font-semibold tracking-tight md:text-7xl">{f.headline}</h1>
         <p className="mt-6 max-w-2xl text-xl text-muted">{f.intro}</p>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/contact" className="rounded-full bg-fg px-6 py-3 font-medium text-bg transition hover:opacity-85">
+          <Link href={`/contact?service=${f.slug}`} className="rounded-full bg-fg px-6 py-3 font-medium text-bg transition hover:opacity-85">
             {f.cta.label}
           </Link>
           {quiz && (
@@ -136,7 +136,7 @@ export default async function FamilyPage({ params }: Props) {
         </Section>
       )}
 
-      <CtaBand title={f.cta.title} body={f.cta.body} label={f.cta.label} />
+      <CtaBand title={f.cta.title} body={f.cta.body} label={f.cta.label} href={`/contact?service=${f.slug}`} />
     </>
   );
 }
