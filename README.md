@@ -37,7 +37,7 @@ If sending fails, the visitor gets a pre-filled email to the same address instea
 
 ## Before launch
 
-- [ ] Replace the 6 **draft** case studies (`draft: true` in `lib/work.ts`) with real ones. Drafts show a "Draft" badge, are `noindex`, and are left out of the sitemap.
+- [ ] Add an SEO & Digital Marketing case study (the category currently has none). Any future placeholder can use `draft: true` in `lib/work.ts` — drafts show a badge, are `noindex`, and are left out of the sitemap.
 - [ ] Register the legal entity, then finish `/privacy` and `/terms` (currently marked Draft).
 - [ ] Upload to cPanel (above) and send a test brief from the live form.
 - [ ] If the designer has the original logo vector or wordmark font, swap it into `logo-paths.ts`.
