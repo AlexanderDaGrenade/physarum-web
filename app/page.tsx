@@ -12,20 +12,28 @@ import { caseStudies } from "@/lib/work";
 
 const principles = [
   {
-    title: "One team, end to end",
-    body: "Data, models, product and growth under one roof — so nothing gets lost between vendors.",
+    title: "Clear pricing, no hidden bills",
+    body: "A fixed budget agreed upfront, so you know what you’ll pay before we start.",
+  },
+  {
+    title: "You own the code",
+    body: "Everything we build is yours from day one — code, data and designs.",
+  },
+  {
+    title: "Plain English, weekly updates",
+    body: "No tech jargon. Realistic timelines and a progress update every week.",
+  },
+  {
+    title: "Support after launch",
+    body: "We stay on to fix bugs, ship updates and keep things running.",
   },
   {
     title: "Measured, not assumed",
-    body: "Every engagement ships with the evals, analytics or QA reports that show it worked.",
+    body: "Every project ships with the tests, evaluations or dashboards that show it worked.",
   },
   {
     title: "Confidential by default",
-    body: "NDAs as standard, least-privilege access to your data, and work we never reuse without permission.",
-  },
-  {
-    title: "Distributed across time zones",
-    body: "A team that has delivered for clients worldwide, so work keeps moving while you sleep.",
+    body: "NDAs as standard and least-privilege access to your data.",
   },
 ];
 
@@ -52,7 +60,7 @@ export default function Home() {
 
       <Section
         eyebrow="Proven paths"
-        title="Work across data, product and growth."
+        title="From the client’s problem to their result."
         intro="Much of our AI work is under NDA, so some clients appear by description rather than name."
       >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -70,11 +78,11 @@ export default function Home() {
         <HowWeWork />
       </Section>
 
-      <Section eyebrow="Capabilities" title="Eight services, five ways in.">
+      <Section eyebrow="What we do" title="Five ways we help you grow.">
         <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
           {families.map((f) => (
             <Link key={f.slug} href={`/services/${f.slug}`} className="group bg-bg p-6 transition hover:bg-card md:p-8">
-              <h3 className="text-2xl font-semibold tracking-tight">{f.name}</h3>
+              <h3 className="text-xl font-semibold tracking-tight">{f.name}</h3>
               <p className="mt-2 text-sm text-muted">{f.tagline}</p>
               <ul className="mt-6 space-y-2">
                 {servicesByFamily(f.slug).map((s) => (
@@ -83,14 +91,29 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 text-sm text-muted group-hover:text-fg">Explore {f.name} →</p>
+              <p className="mt-6 text-sm text-muted group-hover:text-fg">Explore →</p>
             </Link>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="Why Physarum" title="Built like the organism: decentralised, adaptive, efficient.">
-        <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+      <Section eyebrow="Calculate your savings" title="How many hours could AI save your team?">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-3xl border border-line bg-card p-6 md:flex-row md:items-center md:p-10">
+          <p className="max-w-xl text-lg text-muted">
+            Answer four quick questions and get an instant estimate of the time AI automation could give back to your business
+            every week.
+          </p>
+          <Link
+            href="/services/ai-automation-agents#savings"
+            className="shrink-0 rounded-full bg-fg px-6 py-3 font-medium text-bg transition hover:opacity-85"
+          >
+            Take the 1-minute quiz
+          </Link>
+        </div>
+      </Section>
+
+      <Section eyebrow="Why Physarum" title="No tech jargon. No hidden bills. No surprises.">
+        <div className="grid gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
           {principles.map((p) => (
             <div key={p.title} className="border-t border-line pt-5">
               <h3 className="text-lg font-semibold">{p.title}</h3>

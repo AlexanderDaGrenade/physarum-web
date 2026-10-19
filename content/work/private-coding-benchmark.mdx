@@ -1,13 +1,15 @@
 ## The problem
 
-Public coding benchmarks leak into training data. The client needed tasks no model had seen, graded the same way every time.
+Public benchmarks leak into training data, and weak graders let models pass without really solving the task. Our partner needed held-out agentic tasks whose results could be trusted.
 
 ## The path
 
-- Designed realistic, multi-file tasks inside containers, each with a hidden test suite.
-- Wrote deterministic graders and checked each task's reference solution scores full marks.
-- Ran frontier models against the set to calibrate difficulty, then removed tasks that were broken rather than hard.
+- **Realistic tasks:** each task lives in its own containerised environment, with a clear instruction, input files and a hidden test suite.
+- **A reference solution for every task:** we confirm it scores full marks, so any failure belongs to the model, not the task.
+- **Hardened verifiers:** deterministic checks, every validation rule disclosed to the solver, and candidate code run in isolation so it can't read the grader or the answer.
+- **Calibrated on real models:** multiple attempts per model to measure pass rates and catch tasks that are broken rather than hard.
+- **Quality control:** independent review ending in a keep, fix or reject decision, before and after model runs.
 
 ## The result
 
-**A private, reproducible benchmark the client runs on every model release.** Replace this draft with task counts and pass rates.
+**Reliable, reproducible tasks for measuring frontier models.** Task counts and pass-rate distributions are available to prospective clients under NDA.
