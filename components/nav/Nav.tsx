@@ -10,6 +10,7 @@ import { families, serviceHref, servicesByFamily } from "@/lib/services";
 const links = [
   { href: "/work", label: "Work" },
   { href: "/company", label: "Company" },
+  { href: "/careers", label: "Careers" },
 ];
 
 export function Nav() {

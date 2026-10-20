@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LogoMark } from "@/components/brand/Logo";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Section } from "@/components/ui/Section";
@@ -42,6 +43,9 @@ export default function CompanyPage() {
           Physarum brings together a team that has spent years delivering AI data, software and growth work for
           clients around the world — now under one name.
         </p>
+        <Link href="/careers" className="mt-8 inline-block rounded-full border border-line px-6 py-3 font-medium transition hover:border-fg">
+          We’re hiring — see open roles
+        </Link>
       </Section>
 
       <CtaBand title="Work with us" />

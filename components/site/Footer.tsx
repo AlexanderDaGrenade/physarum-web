@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 const company = [
   { href: "/company", label: "About" },
   { href: "/work", label: "Work" },
+  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
