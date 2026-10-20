@@ -1,4 +1,4 @@
-# physarum.org — Apache settings for the static export on cPanel.
+# physarum.org — Apache/LiteSpeed settings for the static export on cPanel.
 
 Options -Indexes
 DirectoryIndex index.html index.php
@@ -31,10 +31,11 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
 
-  # Hashed build assets never change: cache for a year. HTML stays fresh.
-  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+  # Build assets (JS, CSS, fonts) have hashed names and never change: cache for a year.
+  # HTML stays fresh. (Plain FilesMatch — LiteSpeed doesn't support <If>.)
+  <FilesMatch "\.(js|css|woff2?)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
-  </If>
+  </FilesMatch>
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
