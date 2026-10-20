@@ -8,9 +8,12 @@
 
 declare(strict_types=1);
 
+// business@ is a Google Workspace group (MX points to Google). The group must allow
+// posts from "Anyone on the web" so website briefs aren't rejected.
 const RECIPIENT = 'business@physarum.org';
-// Must be a real mailbox on the domain, or many hosts refuse/flag the message.
-const SENDER = 'business@physarum.org';
+// A distinct sender: mail "from" the group to itself via another server looks spoofed to Google.
+// It doesn't need a mailbox; SPF for physarum.org must include this server (spf.web-hosting.com).
+const SENDER = 'website@physarum.org';
 const ALLOWED_ORIGINS = ['https://physarum.org', 'https://www.physarum.org'];
 const MAX_PER_HOUR = 5;
 
