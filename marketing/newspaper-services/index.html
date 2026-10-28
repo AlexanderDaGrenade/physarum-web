@@ -70,6 +70,21 @@
 </head>
 <body>
 <div id="page">
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="0.9" fill="#000" fill-opacity="0.16"/></pattern>
+    <pattern id="dotsD" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.3" fill="#000" fill-opacity="0.22"/></pattern>
+    <g id="bot">
+      <line x1="0" y1="-30" x2="0" y2="-40" stroke="#111" stroke-width="3"/>
+      <circle cx="0" cy="-42" r="4.5" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <rect x="-19" y="-30" width="38" height="28" rx="7" fill="#fff" stroke="#111" stroke-width="3"/>
+      <circle cx="-8" cy="-16" r="4" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <circle cx="8" cy="-16" r="4" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <rect x="-15" y="2" width="30" height="30" rx="5" fill="#fff" stroke="#111" stroke-width="3"/>
+      <circle cx="0" cy="17" r="3" fill="#111"/>
+    </g>
+  </defs>
+</svg>
   <div class="mast">
     <div class="slogan">“Intelligence<br/>that <span style="font-style:normal">navigates</span>”</div>
     <div class="title">The Physarum Times</div>
@@ -90,22 +105,135 @@
   <div class="grid">
     <!-- Left column -->
     <div>
-      <div class="pic" style="height:140px"><svg id="maze1" viewBox="0 0 372 140"></svg></div>
-      <div class="cap">Picture caption: <em>A single line solves the maze — no map required.</em></div>
+      <div class="pic" style="height:120px"><svg id="scene1" viewBox="0 0 372 140" preserveAspectRatio="xMidYMid slice">
+  <rect width="372" height="140" fill="#e8e4d8"/><rect width="372" height="140" fill="url(#dots)"/>
+  <!-- clock -->
+  <circle cx="36" cy="34" r="18" fill="#fff" stroke="#111" stroke-width="3"/>
+  <line x1="36" y1="34" x2="36" y2="22" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="36" y1="34" x2="46" y2="34" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <text x="36" y="66" font-family="Libre Franklin" font-weight="700" font-size="10" text-anchor="middle" fill="#111">3 A.M.</text>
+  <!-- desk -->
+  <rect x="64" y="104" width="190" height="7" fill="#111"/><rect x="72" y="111" width="6" height="29" fill="#111"/><rect x="240" y="111" width="6" height="29" fill="#111"/>
+  <!-- inbox stack -->
+  <g fill="#fff" stroke="#111" stroke-width="2"><rect x="74" y="92" width="34" height="12"/><rect x="72" y="80" width="34" height="12"/><rect x="75" y="68" width="34" height="12"/><rect x="73" y="56" width="34" height="12"/></g>
+  <text x="90" y="50" font-family="Libre Franklin" font-weight="700" font-size="9" text-anchor="middle" fill="#111">INBOX: 400</text>
+  <!-- robot -->
+  <g transform="translate(150 70) scale(1)">
+      <line x1="0" y1="-30" x2="0" y2="-40" stroke="#111" stroke-width="3"/>
+      <circle cx="0" cy="-42" r="4.5" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <rect x="-19" y="-30" width="38" height="28" rx="7" fill="#fff" stroke="#111" stroke-width="3"/>
+      <circle cx="-8" cy="-16" r="4" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <circle cx="8" cy="-16" r="4" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <rect x="-15" y="2" width="30" height="30" rx="5" fill="#fff" stroke="#111" stroke-width="3"/>
+      <circle cx="0" cy="17" r="3" fill="#111"/>
+    </g>
+  <line x1="131" y1="78" x2="114" y2="70" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="169" y1="78" x2="190" y2="66" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <!-- flying papers -->
+  <g fill="#fff" stroke="#111" stroke-width="1.8"><rect x="196" y="48" width="16" height="11" transform="rotate(-18 204 53)"/><rect x="214" y="60" width="16" height="11" transform="rotate(12 222 65)"/></g>
+  <!-- done tray -->
+  <rect x="204" y="86" width="44" height="18" fill="#f5c518" stroke="#111" stroke-width="2.5"/>
+  <text x="226" y="99" font-family="Libre Franklin" font-weight="700" font-size="10" text-anchor="middle" fill="#111">DONE</text>
+  <!-- relaxed human in recliner -->
+  <path d="M282 122 L300 88 L346 100 L340 122" fill="#fff" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="300" cy="70" r="11" fill="#fff" stroke="#111" stroke-width="3"/>
+  <path d="M295 72 q5 4 10 0" fill="none" stroke="#111" stroke-width="2"/>
+  <line x1="306" y1="84" x2="350" y2="84" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="350" y1="84" x2="362" y2="72" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <!-- mug + steam -->
+  <rect x="318" y="58" width="14" height="14" rx="2" fill="#f5c518" stroke="#111" stroke-width="2.5"/>
+  <path d="M332 62 q5 3 0 6" fill="none" stroke="#111" stroke-width="2"/>
+  <path d="M322 54 q-3 -5 0 -10 M328 54 q-3 -5 0 -10" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
+  <text x="300" y="34" font-family="Crimson Text" font-style="italic" font-size="13" text-anchor="middle" fill="#111">“zzz…”</text>
+</svg></div>
+      <div class="cap">Picture caption: <em>Agent clears 400 invoices before sunrise. Team learns about it over coffee.</em></div>
       <div class="rule-thick"></div>
       <h2>AI Automation &amp; Agents</h2>
-      <div class="by"><b>BY THE PHYSARUM DESK</b><br/>WORKING AROUND THE CLOCK</div>
+      <div class="by"><b>BY THE PHYSARUM DESK</b><br/>NEVER SLEEPS (NEITHER DO THE AGENTS)</div>
       <p class="body">Workflow automation, smart chatbots, video-call agents and clear data reports take the <b style="font-weight:600">repetitive work off your team</b> — with monitoring and a human check wherever a mistake would be costly.</p>
 
-      <div class="pic" style="height:118px;margin-top:14px"><svg id="maze2" viewBox="0 0 372 118"></svg></div>
+      <div class="pic" style="height:104px;margin-top:10px"><svg id="scene3" viewBox="0 0 372 118" preserveAspectRatio="xMidYMid slice">
+  <rect width="372" height="118" fill="#e8e4d8"/><rect width="372" height="118" fill="url(#dots)"/>
+  <!-- browser -->
+  <rect x="16" y="12" width="230" height="96" rx="6" fill="#fff" stroke="#111" stroke-width="2.5"/>
+  <line x1="16" y1="26" x2="246" y2="26" stroke="#111" stroke-width="2"/>
+  <circle cx="25" cy="19" r="2.5" fill="#111"/><circle cx="33" cy="19" r="2.5" fill="#111"/><circle cx="41" cy="19" r="2.5" fill="#111"/>
+  <rect x="26" y="33" width="168" height="14" rx="7" fill="#fff" stroke="#111" stroke-width="1.8"/>
+  <text x="34" y="43.5" font-family="Crimson Text" font-size="10.5" fill="#111">who can find the path?</text>
+  <circle cx="186" cy="40" r="4" fill="none" stroke="#111" stroke-width="1.8"/><line x1="189" y1="43" x2="192" y2="46" stroke="#111" stroke-width="1.8"/>
+  <rect x="24" y="54" width="214" height="16" fill="#f5c518"/>
+  <text x="30" y="65.5" font-family="Libre Franklin" font-weight="700" font-size="10" fill="#111">physarum.org — We find the path</text>
+  <g stroke="#111" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"><line x1="30" y1="80" x2="190" y2="80"/><line x1="30" y1="90" x2="160" y2="90"/><line x1="30" y1="100" x2="175" y2="100"/></g>
+  <!-- chart -->
+  <line x1="268" y1="100" x2="356" y2="100" stroke="#111" stroke-width="2.5"/><line x1="268" y1="100" x2="268" y2="22" stroke="#111" stroke-width="2.5"/>
+  <rect x="278" y="80" width="14" height="20" fill="#fff" stroke="#111" stroke-width="2"/>
+  <rect x="298" y="66" width="14" height="34" fill="#fff" stroke="#111" stroke-width="2"/>
+  <rect x="318" y="48" width="14" height="52" fill="#fff" stroke="#111" stroke-width="2"/>
+  <rect x="338" y="28" width="14" height="72" fill="#f5c518" stroke="#111" stroke-width="2"/>
+  <text x="312" y="16" font-family="Libre Franklin" font-weight="700" font-size="9" text-anchor="middle" fill="#111">SALES, NOT LIKES</text>
+</svg></div>
+      <div class="cap">Picture caption: <em>Visitors spotted actually clicking “Buy”. Vanity metrics unavailable for comment.</em></div>
       <h3>SEO &amp; Digital Marketing</h3>
-      <p class="body ni">We don’t just buy traffic. SEO, social and paid ads run as one system — <b style="font-weight:600">measured on leads and sales</b>, not vanity metrics.</p>
+      <p class="body ni">SEO, social and paid ads run as one system — <b style="font-weight:600">measured on leads and sales</b>.</p>
     </div>
 
     <!-- Right column -->
     <div>
-      <div class="pic" style="height:300px"><svg id="hero" viewBox="0 0 652 300"></svg></div>
-      <div class="cap">Picture caption: <em>The network grows, the dead ends retract, the best route remains.</em></div>
+      <div class="pic" style="height:300px"><svg id="hero" viewBox="0 0 652 300">
+  <rect width="652" height="300" fill="#e8e4d8"/><rect width="652" height="300" fill="url(#dots)"/>
+  <!-- blackboard -->
+  <rect x="26" y="22" width="252" height="150" fill="#1a1a1a" stroke="#111" stroke-width="5"/>
+  <text x="46" y="58" font-family="Crimson Text" font-style="italic" font-size="25" fill="#f6f4ee">Final Exam</text>
+  <text x="46" y="86" font-family="Crimson Text" font-size="15" fill="#f6f4ee" fill-opacity="0.85">Questions you have never seen.</text>
+  <text x="46" y="110" font-family="Crimson Text" font-size="15" fill="#f6f4ee" fill-opacity="0.85">No peeking at the answer key.</text>
+  <text x="46" y="134" font-family="Crimson Text" font-size="15" fill="#f6f4ee" fill-opacity="0.85">Graded 5 times. Twice on Sundays.</text>
+  <path d="M200 158 h18 v-10 h18 v10 h18" fill="none" stroke="#f5c518" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="26" y="172" width="252" height="8" fill="#111"/>
+  <!-- clock -->
+  <circle cx="390" cy="56" r="26" fill="#fff" stroke="#111" stroke-width="3.5"/>
+  <line x1="390" y1="56" x2="390" y2="38" stroke="#111" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="390" y1="56" x2="404" y2="64" stroke="#111" stroke-width="3.5" stroke-linecap="round"/>
+  <g transform="translate(85 14)">
+  <!-- school desk -->
+  <rect x="150" y="232" width="190" height="9" fill="#111"/>
+  <rect x="164" y="241" width="7" height="59" fill="#111"/><rect x="318" y="241" width="7" height="59" fill="#111"/>
+  <!-- exam paper -->
+  <g transform="rotate(-4 250 222)">
+    <rect x="212" y="206" width="76" height="26" fill="#fff" stroke="#111" stroke-width="2.5"/>
+    <text x="250" y="223" font-family="Libre Franklin" font-weight="700" font-size="10" text-anchor="middle" fill="#111">Q1 OF 10,000</text>
+  </g>
+  <!-- nervous robot -->
+  <g transform="translate(250 176) scale(1.55)">
+      <line x1="0" y1="-30" x2="0" y2="-40" stroke="#111" stroke-width="3"/>
+      <circle cx="0" cy="-42" r="4.5" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <rect x="-19" y="-30" width="38" height="28" rx="7" fill="#fff" stroke="#111" stroke-width="3"/>
+      <circle cx="-8" cy="-16" r="4" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <circle cx="8" cy="-16" r="4" fill="#f5c518" stroke="#111" stroke-width="2"/>
+      <rect x="-15" y="2" width="30" height="30" rx="5" fill="#fff" stroke="#111" stroke-width="3"/>
+      <circle cx="0" cy="17" r="3" fill="#111"/>
+    </g>
+  <path d="M276 128 q4 8 0 12 q-4 -4 0 -12z" fill="#7ec8e3" stroke="#111" stroke-width="1.6"/>
+  <line x1="224" y1="190" x2="234" y2="212" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+  <!-- pencil -->
+  <line x1="276" y1="186" x2="292" y2="212" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+  <line x1="292" y1="212" x2="300" y2="200" stroke="#f5c518" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- examiner -->
+  <circle cx="520" cy="116" r="22" fill="#fff" stroke="#111" stroke-width="3.5"/>
+  <circle cx="512" cy="114" r="6.5" fill="none" stroke="#111" stroke-width="2.5"/>
+  <circle cx="528" cy="114" r="6.5" fill="none" stroke="#111" stroke-width="2.5"/>
+  <line x1="518.5" y1="114" x2="521.5" y2="114" stroke="#111" stroke-width="2.5"/>
+  <path d="M512 128 h16" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M488 300 L494 160 Q520 144 546 160 L552 300z" fill="#fff" stroke="#111" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- clipboard with rubric -->
+  <rect x="452" y="186" width="54" height="70" rx="4" fill="#fff" stroke="#111" stroke-width="3" transform="rotate(-8 479 221)"/>
+  <g transform="rotate(-8 479 221)" stroke="#111" stroke-width="2" stroke-linecap="round">
+    <line x1="462" y1="204" x2="494" y2="204"/><line x1="462" y1="216" x2="494" y2="216"/><line x1="462" y1="228" x2="486" y2="228"/>
+    <path d="M462 242 l5 5 l9 -11" fill="none" stroke="#f5c518" stroke-width="3"/>
+  </g>
+  <text x="520" y="80" font-family="Crimson Text" font-style="italic" font-size="17" text-anchor="middle" fill="#111">“Show your working.”</text>
+</svg></div>
+      <div class="cap">Picture caption: <em>Model sits an exam it has never seen. Cheating: impossible. Nerves: considerable.</em></div>
       <h2>AI Training &amp; Evaluation</h2>
       <div class="by"><b>FROM OUR AI DESK</b> &nbsp;·&nbsp; FINE-TUNING DATA, BENCHMARKS, EVALS</div>
       <div class="cols">
@@ -194,22 +322,13 @@
     return { ctr, cols, rows };
   }
 
-  maze(document.getElementById("maze1"), 372, 140, 14, 11, { line: 3 });
-  maze(document.getElementById("maze2"), 372, 118, 12, 29, { line: 2.5 });
-  // Hero: maze + glowing logo mark in the middle
-  const hero = document.getElementById("hero");
-  maze(hero, 652, 300, 16, 7, { line: 3.5 });
-  const g = el("g", { transform: "translate(326 150) scale(0.7) translate(-224 -624)" }, hero);
-  el("circle", { cx: 224, cy: 624, r: 175, fill: "#050505" }, g);
-  el("circle", { cx: 224, cy: 624, r: 175, fill: "#f5c518", "fill-opacity": 0.08 }, g);
-  el("path", { d: MARK, fill: "#f5c518" }, g);
   // Advert image: mark on maze
   const ad = document.getElementById("admark");
   maze(ad, 200, 168, 12, 5, { line: 2.5 });
   const g2 = el("g", { transform: "translate(100 84) scale(0.42) translate(-224 -624)" }, ad);
   el("circle", { cx: 224, cy: 624, r: 170, fill: "#050505" }, g2);
-  el("path", { d: MARK, fill: "#f5c518" }, g2);
-  el("path", { d: MARK, fill: "#f5c518" }, document.getElementById("logo"));
+  el("path", { d: MARK, fill: "#fff" }, g2);
+  el("path", { d: MARK, fill: "#fff" }, document.getElementById("logo"));
 </script>
 </body>
 </html>
