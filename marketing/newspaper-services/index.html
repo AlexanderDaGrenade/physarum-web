@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Physarum Times — Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Oswald:wght@500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Libre+Franklin:wght@600;700&display=block"
+  rel="stylesheet"
+/>
+<style>
+  :root { --ink: #111; --paper: #f6f4ee; --mold: #f5c518; --rule: #111; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #444; }
+  #page {
+    width: 1080px; height: 1350px; background: var(--paper); color: var(--ink);
+    padding: 26px 30px 18px; position: relative; overflow: hidden;
+    font-family: "Libre Baskerville", serif;
+  }
+  /* Masthead */
+  .mast { display: grid; grid-template-columns: 150px 1fr 150px; align-items: center; gap: 14px; }
+  .slogan { border: 1.5px solid var(--ink); padding: 12px 8px; text-align: center; font-family: "Crimson Text", serif; font-style: italic; font-size: 16px; line-height: 1.15; }
+  .title { font-family: "UnifrakturMaguntia", serif; font-size: 76px; line-height: 1; text-align: center; white-space: nowrap; letter-spacing: -0.5px; }
+  .weather { font-family: "Crimson Text", serif; font-size: 11.5px; line-height: 1.15; text-align: left; }
+  .weather b { display: block; text-align: center; font-family: "Libre Franklin", sans-serif; font-size: 11px; margin-bottom: 2px; }
+  .dateline {
+    margin-top: 10px; border-top: 1.5px solid var(--rule); border-bottom: 1.5px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center; padding: 4px 2px;
+    font-family: "Crimson Text", serif; font-size: 14px;
+  }
+  .dateline .big { font-family: "Libre Baskerville", serif; font-size: 15px; letter-spacing: 0.3px; }
+  .dateline i { font-size: 16px; }
+  /* Headline */
+  .headline { font-family: "Oswald", sans-serif; font-weight: 600; font-size: 118px; line-height: 1.02; text-align: center; letter-spacing: 0.5px; margin-top: 10px; text-transform: uppercase; }
+  .sub { border-top: 3px solid var(--rule); margin-top: 6px; padding-top: 6px; font-family: "Oswald", sans-serif; font-weight: 500; font-size: 37px; text-align: center; text-transform: uppercase; letter-spacing: 0.3px; }
+  /* Body grid */
+  .grid { display: grid; grid-template-columns: 372px 1fr; gap: 18px; margin-top: 14px; align-items: start; }
+  .pic { background: #050505; border-radius: 1px; overflow: hidden; display: block; }
+  .pic svg { display: block; width: 100%; height: 100%; }
+  .cap { font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.3px; margin-top: 6px; text-transform: uppercase; }
+  .cap em { font-family: "Crimson Text", serif; font-weight: 400; font-style: italic; text-transform: none; font-size: 14px; letter-spacing: 0; }
+  .rule-thick { border-top: 3px solid var(--rule); margin-top: 5px; }
+  h2 { font-family: "Libre Baskerville", serif; font-weight: 700; font-size: 31px; line-height: 1.08; letter-spacing: -0.5px; margin-top: 8px; }
+  h3 { font-family: "Libre Baskerville", serif; font-weight: 700; font-size: 19px; line-height: 1.1; margin: 10px 0 4px; }
+  .by { border-top: 1px dotted #555; border-bottom: 1px dotted #555; margin-top: 7px; padding: 5px 0; font-family: "Crimson Text", serif; font-size: 13.5px; line-height: 1.2; }
+  .by b { font-family: "Crimson Text", serif; font-weight: 600; letter-spacing: 0.4px; }
+  p.body { font-family: "Crimson Text", serif; font-size: 16.5px; line-height: 1.32; text-align: left; margin-top: 8px; text-indent: 22px; }
+  p.body.ni { text-indent: 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .hl { background: linear-gradient(transparent 58%, rgba(245, 197, 24, 0.55) 58%); }
+  /* Advert */
+  .ad {
+    position: absolute; left: 30px; right: 30px; bottom: 48px; height: 168px;
+    border: 1.5px solid var(--ink); display: grid; grid-template-columns: 200px 1fr 250px; align-items: center;
+  }
+  .ad .pic { height: 100%; }
+  .ad .copy { padding: 0 24px; }
+  .ad .copy .a { font-family: "Libre Baskerville", serif; font-size: 33px; white-space: nowrap; letter-spacing: 1px; line-height: 1.05; text-transform: uppercase; }
+  .ad .copy .b { font-family: "Crimson Text", serif; font-style: italic; font-size: 42px; text-align: right; line-height: 1.1; }
+  .ad .side { text-align: center; font-family: "Crimson Text", serif; font-size: 17px; line-height: 1.3; padding-right: 10px; }
+  .ad .side .logo { width: 58px; height: 58px; margin: 0 auto 6px; background: #000; border-radius: 50%; display: grid; place-items: center; }
+  .ad .side .logo svg { width: 38px; height: 38px; }
+  .ad .side .sale { font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.6px; }
+  .foot {
+    position: absolute; left: 0; right: 0; bottom: 16px; text-align: center;
+    font-family: "Crimson Text", serif; font-size: 13px; letter-spacing: 3.5px; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div id="page">
+  <div class="mast">
+    <div class="slogan">“Intelligence<br/>that <span style="font-style:normal">navigates</span>”</div>
+    <div class="title">The Physarum Times</div>
+    <div class="weather"><b>Premier Edition</b>Forecast: clear paths ahead. Dead ends retracting by noon. Outlook: shorter routes, fewer surprises, fixed budgets.</div>
+  </div>
+  <div class="dateline">
+    <span class="big">VOL. I…No. 1</span>
+    <span>© 2026 Physarum</span>
+    <span class="big">WORLDWIDE, OCTOBER 2026</span>
+    <span>Delivered digitally</span>
+    <span>physarum.org</span>
+    <i>FREE</i>
+  </div>
+
+  <div class="headline">Five Ways We Find The Path</div>
+  <div class="sub">AI, software, web &amp; growth. One team. One route.</div>
+
+  <div class="grid">
+    <!-- Left column -->
+    <div>
+      <div class="pic" style="height:140px"><svg id="maze1" viewBox="0 0 372 140"></svg></div>
+      <div class="cap">Picture caption: <em>A single line solves the maze — no map required.</em></div>
+      <div class="rule-thick"></div>
+      <h2>AI Automation &amp; Agents</h2>
+      <div class="by"><b>BY THE PHYSARUM DESK</b><br/>WORKING AROUND THE CLOCK</div>
+      <p class="body">Workflow automation, smart chatbots, video-call agents and clear data reports take the <b style="font-weight:600">repetitive work off your team</b> — with monitoring and a human check wherever a mistake would be costly.</p>
+
+      <div class="pic" style="height:118px;margin-top:14px"><svg id="maze2" viewBox="0 0 372 118"></svg></div>
+      <h3>SEO &amp; Digital Marketing</h3>
+      <p class="body ni">We don’t just buy traffic. SEO, social and paid ads run as one system — <b style="font-weight:600">measured on leads and sales</b>, not vanity metrics.</p>
+    </div>
+
+    <!-- Right column -->
+    <div>
+      <div class="pic" style="height:300px"><svg id="hero" viewBox="0 0 652 300"></svg></div>
+      <div class="cap">Picture caption: <em>The network grows, the dead ends retract, the best route remains.</em></div>
+      <h2>AI Training &amp; Evaluation</h2>
+      <div class="by"><b>FROM OUR AI DESK</b> &nbsp;·&nbsp; FINE-TUNING DATA, BENCHMARKS, EVALS</div>
+      <div class="cols">
+        <div>
+          <p class="body">Fine-tuning datasets written by vetted experts, private benchmarks your model has <b style="font-weight:600">never seen</b>, and multi-run evaluations — every task validated before delivery.</p>
+          <h3>SaaS Development</h3>
+          <p class="body ni">Your vision. Your code. MVPs and scalable platforms with <b style="font-weight:600">clear pricing</b> and no hidden bills.</p>
+        </div>
+        <div>
+          <h3 style="margin-top:8px">Web &amp; Mobile Apps</h3>
+          <p class="body ni">Websites, web apps and iOS &amp; Android from one codebase — designed for the user, <b style="font-weight:600">supported after launch</b>.</p>
+          <p class="body">Fixed budgets agreed upfront, weekly updates in plain English, and you own everything we build.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad">
+    <div class="pic"><svg id="admark" viewBox="0 0 200 168"></svg></div>
+    <div class="copy">
+      <div class="a">Have a maze for us?</div>
+      <div class="b">we’ll find the path…</div>
+    </div>
+    <div class="side">
+      <div class="logo"><svg id="logo" viewBox="86 490 276 268"></svg></div>
+      <div class="sale">FREE CONSULTATION</div>
+      Start a project at<br/>physarum.org
+    </div>
+  </div>
+  <div class="foot">physarum.org &nbsp; ✦ &nbsp; published by physarum</div>
+</div>
+
+<script>
+  const MARK = "M189.5 750.8C186.2 749.6 180.5 745.6 177.7 742.5C170.0 733.9 170.1 718.0 177.9 708.1C181.2 704.0 191.4 698.0 195.2 698.0C199.6 698.0 208.0 693.0 212.0 687.9C214.1 685.2 219.4 676.1 223.7 667.7L231.5 652.5L231.3 643.0C230.9 627.1 233.5 619.3 240.2 615.9C245.8 613.0 252.3 613.7 262.0 618.0C269.1 621.2 270.3 621.4 283.1 621.8C300.1 622.3 305.6 621.0 313.2 614.5C324.0 605.3 332.9 603.0 342.0 607.1C360.8 615.6 362.0 641.2 344.1 650.2C333.2 655.7 323.7 653.5 313.7 643.0C305.4 634.4 299.7 632.0 287.8 632.0C278.5 632.0 273.0 633.4 269.5 636.6C264.8 641.0 265.0 647.6 270.1 655.4C274.8 662.5 278.8 665.0 286.5 666.0C294.7 667.0 300.1 670.4 303.2 676.3C307.8 685.2 305.0 695.9 296.7 701.4C293.0 703.8 291.7 704.1 285.9 703.8C277.5 703.4 272.9 700.2 269.2 692.2C266.9 687.2 266.8 686.3 267.9 681.8C270.3 671.3 268.9 666.2 261.1 657.8C255.3 651.7 251.2 650.7 246.0 654.2C243.2 656.1 240.7 660.1 232.6 676.0C221.1 698.7 220.1 703.3 223.9 713.4C231.3 733.2 218.6 752.2 198.1 751.9C195.0 751.9 191.2 751.4 189.5 750.8ZM137.7 723.9C129.8 722.6 124.0 715.7 124.0 707.7C124.0 693.5 139.0 685.4 150.9 693.3C155.5 696.4 158.0 701.3 158.0 707.5C158.0 718.8 149.2 725.9 137.7 723.9ZM173.2 681.1C161.1 678.0 154.9 662.7 161.3 651.7C165.9 644.0 175.7 639.7 183.8 641.9C188.8 643.3 195.1 648.6 197.4 653.4C200.7 660.3 198.7 671.5 193.4 676.1C188.3 680.6 179.7 682.7 173.2 681.1ZM112.7 632.0C107.2 630.6 103.6 628.5 99.4 624.2C94.3 619.0 91.8 613.5 91.2 606.4C90.6 598.4 92.9 591.6 98.2 585.5C104.1 578.8 110.8 575.7 119.5 575.7C129.3 575.6 134.5 578.2 143.4 587.4C149.6 593.8 151.3 595.0 157.4 597.0C170.8 601.4 189.8 598.2 193.5 590.9C196.0 586.2 195.4 580.0 192.1 574.9C185.2 564.5 180.4 561.1 171.0 559.9C159.3 558.5 154.0 553.8 153.2 544.3C152.7 537.9 154.1 534.0 158.6 530.0C164.9 524.5 173.2 524.2 180.3 529.2C184.6 532.3 186.0 536.0 186.0 544.5C186.0 553.5 187.8 557.7 194.8 565.2C200.3 571.1 203.6 573.0 208.5 573.0C215.6 573.0 220.3 567.4 223.4 555.3C225.9 545.7 225.5 541.6 221.0 532.0C218.0 525.6 217.0 522.2 217.0 518.4C217.0 511.4 221.1 503.6 226.9 499.5C230.8 496.8 231.9 496.5 239.3 496.5C246.8 496.5 247.9 496.8 251.6 499.5C262.3 507.1 264.8 520.5 257.7 531.1C255.4 534.5 254.1 535.5 244.0 541.3C238.1 544.7 233.1 551.6 230.8 559.5C229.4 563.9 229.3 576.0 230.5 585.7C231.4 593.6 230.8 596.1 226.4 601.0C221.9 606.0 218.6 607.0 207.0 606.9C200.0 606.8 196.4 607.3 193.5 608.6C190.6 609.8 185.3 610.5 174.0 611.0C165.5 611.5 156.8 612.3 154.7 613.0C152.3 613.7 148.1 616.8 143.7 620.9C139.7 624.7 134.6 628.7 132.3 629.9C127.4 632.4 118.2 633.3 112.7 632.0ZM262.5 594.8C252.5 589.0 251.2 575.1 259.9 567.7C264.0 564.3 269.0 563.0 275.0 563.7C279.1 564.2 280.6 563.8 284.5 561.6C289.9 558.4 293.0 553.9 293.0 549.2C293.0 544.3 296.4 538.5 300.4 536.6C309.7 532.2 319.0 538.4 319.0 549.1C319.0 552.6 318.4 553.9 315.1 557.1C312.9 559.4 310.2 561.0 308.9 561.1C294.7 561.4 288.0 566.8 288.0 577.9C288.0 584.5 285.0 591.3 280.8 594.4C276.5 597.5 267.5 597.7 262.5 594.8Z";
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    parent && parent.appendChild(n);
+    return n;
+  };
+  function rng(seed) { return () => ((seed = (seed * 16807) % 2147483647) / 2147483647); }
+
+  // Faint maze with a yellow line solving it (start → end), plus nodes along the way.
+  function maze(svg, w, h, cell, seed, opts = {}) {
+    const rand = rng(seed);
+    const cols = Math.floor(w / cell), rows = Math.floor(h / cell);
+    const ox = (w - cols * cell) / 2, oy = (h - rows * cell) / 2;
+    const open = new Uint8Array(cols * rows), seen = new Uint8Array(cols * rows);
+    const D = [[0, -1, 1, 4], [1, 0, 2, 8], [0, 1, 4, 1], [-1, 0, 8, 2]];
+    const stack = [0]; seen[0] = 1;
+    while (stack.length) {
+      const c = stack[stack.length - 1], x = c % cols, y = (c / cols) | 0;
+      const opt = D.filter(([dx, dy]) => { const nx = x + dx, ny = y + dy; return nx >= 0 && ny >= 0 && nx < cols && ny < rows && !seen[ny * cols + nx]; });
+      if (!opt.length) { stack.pop(); continue; }
+      const [dx, dy, b, ob] = opt[Math.floor(rand() * opt.length)];
+      const n = (y + dy) * cols + x + dx; open[c] |= b; open[n] |= ob; seen[n] = 1; stack.push(n);
+    }
+    el("rect", { width: w, height: h, fill: "#050505" }, svg);
+    let d = "";
+    for (let c = 0; c < cols * rows; c++) {
+      const x = ox + (c % cols) * cell, y = oy + ((c / cols) | 0) * cell;
+      if (!(open[c] & 1)) d += `M${x} ${y}h${cell}`;
+      if (!(open[c] & 8)) d += `M${x} ${y}v${cell}`;
+      if (c % cols === cols - 1) d += `M${x + cell} ${y}v${cell}`;
+      if (((c / cols) | 0) === rows - 1) d += `M${x} ${y + cell}h${cell}`;
+    }
+    el("path", { d, stroke: "#fff", "stroke-opacity": 0.14, "stroke-width": 1, fill: "none" }, svg);
+    // BFS path from start to end
+    const start = opts.start ?? 0, end = opts.end ?? cols * rows - 1;
+    const prev = new Int32Array(cols * rows).fill(-1), q = [start]; prev[start] = start;
+    for (let i = 0; i < q.length; i++) {
+      const c = q[i], x = c % cols, y = (c / cols) | 0;
+      for (const [dx, dy, b] of D) if (open[c] & b) { const n = (y + dy) * cols + x + dx; if (prev[n] < 0) { prev[n] = c; q.push(n); } }
+    }
+    const pts = []; for (let c = end; ; c = prev[c]) { pts.push(c); if (c === start) break; }
+    pts.reverse();
+    const ctr = (c) => [ox + (c % cols + 0.5) * cell, oy + (((c / cols) | 0) + 0.5) * cell];
+    const pd = pts.map((c, i) => (i ? "L" : "M") + ctr(c).join(" ")).join("");
+    el("path", { d: pd, stroke: "#f5c518", "stroke-opacity": 0.12, "stroke-width": cell * 0.4, fill: "none", "stroke-linecap": "round", "stroke-linejoin": "round" }, svg);
+    el("path", { d: pd, stroke: "#f5c518", "stroke-width": opts.line ?? 3, fill: "none", "stroke-linecap": "round", "stroke-linejoin": "round" }, svg);
+    pts.forEach((c, i) => { if (i % 7 === 3) { const [x, y] = ctr(c); el("circle", { cx: x, cy: y, r: (opts.line ?? 3) * 1.2, fill: "#f5c518" }, svg); } });
+    const [ex, ey] = ctr(end);
+    el("circle", { cx: ex, cy: ey, r: (opts.line ?? 3) * 3.2, fill: "#f5c518", "fill-opacity": 0.25 }, svg);
+    el("circle", { cx: ex, cy: ey, r: (opts.line ?? 3) * 1.8, fill: "#f5c518" }, svg);
+    return { ctr, cols, rows };
+  }
+
+  maze(document.getElementById("maze1"), 372, 140, 14, 11, { line: 3 });
+  maze(document.getElementById("maze2"), 372, 118, 12, 29, { line: 2.5 });
+  // Hero: maze + glowing logo mark in the middle
+  const hero = document.getElementById("hero");
+  maze(hero, 652, 300, 16, 7, { line: 3.5 });
+  const g = el("g", { transform: "translate(326 150) scale(0.7) translate(-224 -624)" }, hero);
+  el("circle", { cx: 224, cy: 624, r: 175, fill: "#050505" }, g);
+  el("circle", { cx: 224, cy: 624, r: 175, fill: "#f5c518", "fill-opacity": 0.08 }, g);
+  el("path", { d: MARK, fill: "#f5c518" }, g);
+  // Advert image: mark on maze
+  const ad = document.getElementById("admark");
+  maze(ad, 200, 168, 12, 5, { line: 2.5 });
+  const g2 = el("g", { transform: "translate(100 84) scale(0.42) translate(-224 -624)" }, ad);
+  el("circle", { cx: 224, cy: 624, r: 170, fill: "#050505" }, g2);
+  el("path", { d: MARK, fill: "#f5c518" }, g2);
+  el("path", { d: MARK, fill: "#f5c518" }, document.getElementById("logo"));
+</script>
+</body>
+</html>
