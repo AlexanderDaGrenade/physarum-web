@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Physarum LinkedIn banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #333; font-family: "Space Grotesk", sans-serif; }
+  .banner { width: 1128px; height: 191px; position: relative; overflow: hidden; background: #0e1612; margin-bottom: 20px; }
+  .banner svg { position: absolute; inset: 0; }
+  .copy { position: absolute; left: 592px; top: 38px; }
+  .brand { color: #f0b72f; font-weight: 700; font-size: 11.5px; letter-spacing: 3.2px; }
+  .title { color: #f3f1ea; font-weight: 400; font-size: 30px; letter-spacing: -0.2px; margin-top: 10px; line-height: 1; }
+  .services { color: #d6d9d4; font-weight: 600; font-size: 11.6px; margin-top: 15px; letter-spacing: 0.1px; }
+  .cta { color: #a9aea8; font-weight: 400; font-size: 11.6px; margin-top: 14px; }
+  .cta b { color: #f0b72f; font-weight: 700; }
+</style>
+</head>
+<body>
+<template id="art">
+  <svg width="1128" height="191" viewBox="0 0 1128 191" aria-hidden="true">
+    <defs>
+      <radialGradient id="glow"><stop offset="0" stop-color="#f0b72f" stop-opacity="0.35"/><stop offset="1" stop-color="#f0b72f" stop-opacity="0"/></radialGradient>
+    </defs>
+    <!-- faint background threads -->
+    <g fill="none" stroke="#f0b72f" stroke-opacity="0.22" stroke-width="0.9">
+      <path d="M-20 175 C 40 150, 70 128, 87 120 C 120 100, 160 70, 228 60"/>
+      <path d="M228 60 C 300 40, 420 20, 520 10 C 545 7, 560 2, 575 -6"/>
+      <path d="M228 60 C 260 95, 275 140, 288 175"/>
+      <path d="M368 140 C 420 120, 460 115, 520 118 C 545 119, 565 112, 590 104"/>
+      <path d="M147 169 C 120 185, 90 195, 60 205"/>
+      <path d="M27 29 C 10 60, 0 95, -10 120"/>
+      <path d="M87 120 C 95 140, 115 160, 147 169"/>
+      <path d="M368 140 C 330 110, 290 85, 228 60"/>
+      <path d="M508 40 C 470 70, 430 100, 368 140"/>
+    </g>
+    <!-- main network -->
+    <g fill="none" stroke="#f0b72f" stroke-width="2.6" stroke-linecap="round">
+      <path d="M27 29 C 50 60, 70 95, 87 120"/>
+      <path d="M27 29 C 90 32, 170 42, 228 60"/>
+      <path d="M87 120 C 130 95, 180 70, 228 60"/>
+      <path d="M228 60 C 290 70, 320 115, 368 140"/>
+      <path d="M368 140 C 420 120, 450 50, 508 40"/>
+      <path d="M87 120 C 110 140, 125 160, 147 169"/>
+      <path d="M147 169 C 190 160, 240 165, 288 175"/>
+      <path d="M288 175 C 320 165, 345 150, 368 140"/>
+    </g>
+    <!-- nodes -->
+    <g>
+      <circle cx="27" cy="29" r="16" fill="url(#glow)"/><circle cx="27" cy="29" r="5" fill="#f0b72f"/>
+      <circle cx="87" cy="120" r="20" fill="url(#glow)"/><circle cx="87" cy="120" r="6" fill="#f0b72f"/>
+      <circle cx="147" cy="169" r="14" fill="url(#glow)"/><circle cx="147" cy="169" r="5" fill="#f0b72f"/>
+      <circle cx="228" cy="60" r="22" fill="url(#glow)"/><circle cx="228" cy="60" r="6.5" fill="#f0b72f"/>
+      <circle cx="288" cy="175" r="14" fill="url(#glow)"/><circle cx="288" cy="175" r="5" fill="#f0b72f"/>
+      <circle cx="368" cy="140" r="18" fill="url(#glow)"/><circle cx="368" cy="140" r="6" fill="#f0b72f"/>
+      <circle cx="508" cy="40" r="16" fill="url(#glow)"/><circle cx="508" cy="40" r="5.5" fill="#f0b72f"/>
+    </g>
+  </svg>
+</template>
+
+<div class="banner" id="banner-original">
+  <div class="copy">
+    <div class="brand">PHYSARUM</div>
+    <div class="title">Intelligence that navigates</div>
+    <div class="services">AI &amp; LLMs · Software &amp; Apps · Web · Digital Marketing &amp; SEO</div>
+    <div class="cta">Have a maze for us? <b>business@physarum.org</b></div>
+  </div>
+</div>
+
+<div class="banner" id="banner-updated">
+  <div class="copy">
+    <div class="brand">PHYSARUM</div>
+    <div class="title">Intelligence that navigates</div>
+    <div class="services">AI Automation · AI Training &amp; Evaluation · SaaS · Web &amp; Mobile · SEO &amp; Marketing</div>
+    <div class="cta">Have a maze for us? <b>business@physarum.org</b></div>
+  </div>
+</div>
+
+<script>
+  const art = document.getElementById("art");
+  document.querySelectorAll(".banner").forEach((b) => b.prepend(art.content.cloneNode(true)));
+</script>
+</body>
+</html>
